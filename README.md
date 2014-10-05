@@ -61,3 +61,10 @@ Methods
 **addEventListener(eventType, callback)**
 **removeEventListener(eventType, callback)**
 **dispatchEvent(event)** The event can be any object that has "type" propertie as string, yes you can use `new Event('myEvent')` and it will work.
+
+TODO
+----
+
+* Add support to **stopImmediatePropagation**
+* Add support to children property propagation
+* Add support to *useCapture*
