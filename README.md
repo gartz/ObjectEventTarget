@@ -58,9 +58,9 @@ The rest you know...
 Methods
 -------
 
-* **addEventListener(eventType, callback)**
-* **removeEventListener(eventType, callback)**
-* **dispatchEvent(event)** The event can be any object that has "type" propertie as string, yes you can use `new Event('myEvent')` and it will work.
+* **addEventListener( eventType, callback )**
+* **removeEventListener( eventType, callback )**
+* **dispatchEvent( event )** The event can be any object that has "type" propertie as string, yes you can use `new Event('myEvent')` and it will work.
 
 TODO
 ----
