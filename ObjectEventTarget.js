@@ -29,6 +29,58 @@
     }
   }
   
+  var WeakMap = root.WeakMap;
+  if (!WeakMap) {
+    WeakMap = function WeakMapArrayShim(){
+      // A simple shim for WeakMap, only for usage in this lib, so it doesn't
+      // support all features from a WeakMap, and it uses Array.indexOf for
+      // search that isn't very performatic but allow us to have support in
+      // old browsers
+
+      this.map = [];
+    }
+    var find = function (arr, key){
+      // Search for a meta element for the WeakMap shim, and if found
+      // move this element for the begin of the array, to optimize usual
+      // repetitive usage of the same object, and fast find the most used
+
+      for (var i = 0, m = arr.length; i < m; i++){
+        if (arr[i].key === key) {
+          if (i > 0){
+            var r = arr.splice(i, 1);
+            arr.unshift(r);
+            return r;
+          }
+          return arr[i];
+        }
+      }
+      return;
+    }
+    WeakMap.prototype = {
+      get: function (obj){
+        var meta = find(this.map, obj);
+        return meta && meta.value;
+      },
+      set: function (obj, value){
+        var meta = find(this.map, obj);
+        if (meta){
+          meta.value = value;
+        } else {
+          this.map.push({key: obj, value: value});
+        }
+      },
+      has: function (obj){
+        return !!find(this.map, obj);
+      },
+      delete: function (obj){
+        var meta = find(this.map, obj);
+        if (meta) {
+          this.map.shift();
+        }
+      }
+    };
+  }
+  
   var map = new WeakMap();
   function add(obj, type, callback){
     // Add a object with a event type and callback to a weakmap
