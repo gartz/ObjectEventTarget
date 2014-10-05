@@ -1,0 +1,44 @@
+{
+  "name": "ObjectEventTarget",
+  "description": "A same behaviour EventTarget prototype, that can work with any object from JavaScript",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gartz/ObjectEventTarget/",
+  "author": {
+    "name": "Gabriel Reitz Giannattasio <gabriel@gartz.com.br>",
+    "url": "http://gartz.com.br"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gartz/ObjectEventTarget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gartz/ObjectEventTarget/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gartz/ObjectEventTarget/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Grunt.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "start": "node ./server.js",
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "assemble": "~0.4.37",
+    "grunt": "~0.4.4",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.4.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "node-static": "^0.7.4"
+  },
+  "keywords": [
+    "assemble"
+  ]
+}
