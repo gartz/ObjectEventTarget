@@ -154,6 +154,9 @@
     eventsQueue = eventsQueue.slice();
     for (var i = 0, m = eventsQueue.length; i < m; i++) {
       eventsQueue[i].call(obj, event);
+      if (event.immediatePropagationStopped) {
+        return;
+      }
     }
   }
   
