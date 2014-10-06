@@ -67,9 +67,3 @@ Event properties
 
 * **type** the name/type of the event
 * **immediatePropagationStopped** when a callback stoped the event chain (recomend to use the Event or CustomEvent constructor to use this)
-
-TODO
-----
-
-* Add support to children property propagation
-* Add support to *useCapture*
