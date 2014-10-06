@@ -19,7 +19,7 @@
     this[type] = [callback];
   }
   EventsMap.prototype = Object.prototype;
-  
+
   function typeErrors(type, callback){
     if (typeof type !== 'string' || type.length === 0){
       throw new TypeError('Type must be a string and can\'t be empty');
@@ -28,7 +28,7 @@
       throw new TypeError('Callback must be a function');
     }
   }
-  
+
   var WeakMap = root.WeakMap;
   if (!WeakMap) {
     WeakMap = function WeakMapArrayShim(){
@@ -38,7 +38,7 @@
       // old browsers
 
       this.map = [];
-    }
+    };
     var find = function (arr, key){
       // Search for a meta element for the WeakMap shim, and if found
       // move this element for the begin of the array, to optimize usual
@@ -55,7 +55,7 @@
         }
       }
       return;
-    }
+    };
     WeakMap.prototype = {
       get: function (obj){
         var meta = find(this.map, obj);
@@ -80,7 +80,7 @@
       }
     };
   }
-  
+
   var map = new WeakMap();
   function add(obj, type, callback){
     // Add a object with a event type and callback to a weakmap
@@ -97,13 +97,13 @@
     }
     map.set(obj, new EventsMap(type, callback));
   }
-  
+
   function remove(obj, type, callback){
     // Removes the callback from the event queue and keep the memory clean
     // removing empty events queue and objects without events from the map
-    
+
     typeErrors(type, callback);
-    
+
     if (!map.has(obj)){
       return;
     }
@@ -121,12 +121,12 @@
       eventQueue.splice(pos, 1);
       pos = eventQueue.indexOf(callback);
     }
-    
+
     // Remove the propertie with array when the array is empty
     if (eventQueue.length === 0){
       delete eventsMap[type];
     }
-    
+
     // If the eventsMap isn't empty don't remove from the objects weakmap
     for (var prop in eventsMap)
     if (eventsMap.hasOwnProperty(prop)) {
@@ -134,13 +134,13 @@
     }
     map.delete(obj);
   }
-  
+
   function dispatch(obj, event){
     // Dispatch a queue of events of the tye passed inside the event object
 
     // Check if the event is a valid object
     if (!event || typeof event.type !== 'string'){
-      throw new TypeError('Illegal invocation')
+      throw new TypeError('Illegal invocation');
     }
     var eventsMap = map.get(obj);
     if (!eventsMap) {
@@ -159,26 +159,26 @@
       }
     }
   }
-  
+
   function ObjectEventTarget(){
     // It's a singleton, once we have the instance for the prototype
     // the user should not be allowed to create new instances
     if (ObjectEventTarget.prototype instanceof ObjectEventTarget){
       throw new TypeError('Illegal constructor');
     }
-    
+
     function illegalIvovation(context){
       if (context === ObjectEventTarget.prototype) {
-        throw new TypeError('Illegal invocation')
+        throw new TypeError('Illegal invocation');
       }
     }
-    
+
     this.addEventListener = function(type, callback){
       illegalIvovation(this);
       add(this, type, callback);
     };
     this.removeEventListener = function(type, callback){
-      illegalIvovation(this)
+      illegalIvovation(this);
       remove(this, type, callback);
     };
     this.dispatchEvent = function(event){
@@ -192,4 +192,4 @@
 
   // Expose the ObjectEventTarget to global
   root.ObjectEventTarget = ObjectEventTarget;
-})(this)
+})(typeof exports == 'undefined' ? window : global);
