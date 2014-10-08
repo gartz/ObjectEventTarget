@@ -60,7 +60,7 @@ Methods
 
 * **addEventListener( eventType, callback )**
 * **removeEventListener( eventType, callback )**
-* **dispatchEvent( event )** The event can be any object that has "type" propertie as string, yes you can use `new Event('myEvent')` and it will work.
+* **dispatchEvent( event )** The event can be any object that has "type" propertie as string, you also can use `new Event('myEvent')` or `new ObjectEvent('myEvent')` where the second is compatible with non-modern browser and nodejs.
 
 Event properties
 ----------------
