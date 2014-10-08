@@ -192,4 +192,7 @@
 
   // Expose the ObjectEventTarget to global
   root.ObjectEventTarget = ObjectEventTarget;
-})(typeof exports == 'undefined' ? window : global);
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
+    module.exports = ObjectEventTarget;
+  }
+})(this);
