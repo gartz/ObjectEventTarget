@@ -12,6 +12,9 @@
 // foo.dispatchEvent({type: 'dosomething'});
 // // [Foo object], do something
 // ```
+//
+// In old browsers that doesn't support enumerable property definition, the prototype
+// methods will be iterated when you do for in, so don't forget to use the hasOwnProperty
 (function(root) {
   'use strict';
   // Named object what contains the events queue for an object
@@ -142,22 +145,64 @@
     if (!event || typeof event.type !== 'string'){
       throw new TypeError('Illegal invocation');
     }
+
+    // Init the event
+    if (!(event instanceof Event || event instanceof ObjectEvent)){
+      event.initEvent = ObjectEvent.prototype.initEvent;
+      event.preventDefault = ObjectEvent.prototype.preventDefault;
+      event.stopImmediatePropagation = ObjectEvent.prototype.stopImmediatePropagation;
+    }
+    event.initEvent();
+
     var eventsMap = map.get(obj);
     if (!eventsMap) {
-      return;
+      return true;
     }
     var eventsQueue = eventsMap[event.type];
     if (!eventsQueue) {
-      return;
+      return true;
     }
+
+    // Prevent event to be triggered more then one time
+    // if you preventDefault the event should be triggered again
+    if (event.path.length !== 0 && event.returnValue) {
+      return true;
+    }
+
+    // Prevent forcing event new values after begin the callback queue calls
+    var returnValue = true;
+    var cancelable = !!event.cancelable;
+    var defaultPrevented = !!event.defaultPrevented;
+
+    // Reset and add the obj instance to path
+    event.path.length = 0;
+    event.path.push(obj);
+
     // Clone the array before iterate, avoid event changing the queue on fly
     eventsQueue = eventsQueue.slice();
     for (var i = 0, m = eventsQueue.length; i < m; i++) {
+      // Fix event properties states
+      event.eventPhase = ObjectEvent.prototype.AT_TARGET;
+      event.cancelable = cancelable;
+      event.returnValue = returnValue;
+      event.defaultPrevented = !returnValue;
+
+      // Call next event, using the object instance as context
       eventsQueue[i].call(obj, event);
+      
+      // Update the returnValue when default has been prevented
+      returnValue = returnValue && !(cancelable && event.defaultPrevented);
+
+      // Stop the immidiate propagation and return the returnValue
       if (event.immediatePropagationStopped) {
-        return;
+        return returnValue;
       }
     }
+
+    event.eventPhase = ObjectEvent.prototype.NONE;
+
+    // true if default hasn't been prevented
+    return returnValue;
   }
 
   function ObjectEventTarget(){
@@ -190,9 +235,93 @@
   ObjectEventTarget.prototype = Object.prototype;
   ObjectEventTarget.prototype = new ObjectEventTarget();
 
+  function ObjectEvent(type, options){
+    if (arguments.length === 0){
+      throw new TypeError('Failed to construct \'ObjectEvent\': An event name must be provided.');
+    }
+
+    options = options || {};
+
+    // Time that the event has created
+    this.timeStamp = Date.now();
+
+    // Allow preventDefault()
+    this.cancelable = options.cancelable === true;
+
+    // Add custom details to the event
+    if (typeof options.detail !== 'undefined') {
+      this.detail = options.detail;
+    }
+
+    // Phase of the event
+    this.eventPhase = ObjectEvent.prototype.NONE;
+
+    this.path = [];
+    this.immediatePropagationStopped = false;
+    this.type = String(type);
+  }
+  ObjectEvent.prototype.AT_TARGET = 2;
+  ObjectEvent.prototype.NONE = 0;
+  ObjectEvent.prototype.initEvent = function() {
+    // Init event if it has some propertie wrong, fix it
+
+    // Time that the event has created
+    this.timeStamp = this.timeStamp || Date.now();
+
+    // Allow preventDefault()
+    this.cancelable = this.cancelable === true;
+
+    // Phase of the event
+    this.eventPhase = ObjectEvent.prototype.NONE;
+
+    // Cleanup the path and add the instance to the event path
+    if (!this.path || !this.path.push) {
+      this.path = [];
+    }
+
+    this.immediatePropagationStopped = this.immediatePropagationStopped === true;
+    this.type = String(this.type);
+  };
+  ObjectEvent.prototype.preventDefault = function(){
+    // Prevent the default result, makes the dispatchEvent returns false
+    this.defaultPrevented = !!this.cancelable;
+  };
+  ObjectEvent.prototype.stopImmediatePropagation = function(){
+    // Don't allow the next callback to be called
+    this.immediatePropagationStopped = true;
+  };
+
+  // Prevent enumerable prototype when supported by the browser
+  if (Object.defineProperties){
+    var definePropertiesArgs = function (prototype){
+      var props = {};
+      for (var k in prototype) {
+        props[k] = {
+          value: prototype[k],
+          enumerable: false
+        }
+      }
+      return [prototype, props];
+    };
+    
+    // ObjectEvent remove enumerable prototype
+    Object.defineProperties.apply(Object, definePropertiesArgs(ObjectEvent.prototype));
+    // ObjectEventTarget remove enumerable prototype
+    Object.defineProperties.apply(Object, definePropertiesArgs(ObjectEventTarget.prototype));
+  }
+
   // Expose the ObjectEventTarget to global
+  if (typeof window === 'undefined'){
+    root = global;
+  }
   root.ObjectEventTarget = ObjectEventTarget;
+  root.ObjectEvent = ObjectEvent;
+
+  // Export as module to nodejs
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
-    module.exports = ObjectEventTarget;
+    module.exports = {
+      ObjectEventTarget: ObjectEventTarget,
+      ObjectEvent: ObjectEvent
+    };
   }
 })(this);
