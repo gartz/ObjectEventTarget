@@ -147,12 +147,7 @@
     }
 
     // Init the event
-    if (!(event instanceof Event || event instanceof ObjectEvent)){
-      event.initEvent = ObjectEvent.prototype.initEvent;
-      event.preventDefault = ObjectEvent.prototype.preventDefault;
-      event.stopImmediatePropagation = ObjectEvent.prototype.stopImmediatePropagation;
-    }
-    event.initEvent();
+    ObjectEvent.prototype.initEvent.call(event);
 
     var eventsMap = map.get(obj);
     if (!eventsMap) {
@@ -176,16 +171,19 @@
 
     // Reset and add the obj instance to path
     event.path.length = 0;
-    event.path.push(obj);
+    event.path.push && event.path.push(obj);
+    var path = event.path;
 
     // Clone the array before iterate, avoid event changing the queue on fly
     eventsQueue = eventsQueue.slice();
     for (var i = 0, m = eventsQueue.length; i < m; i++) {
-      // Fix event properties states
+      // Ensure non-writetible event properties states
       event.eventPhase = ObjectEvent.prototype.AT_TARGET;
       event.cancelable = cancelable;
       event.returnValue = returnValue;
       event.defaultPrevented = !returnValue;
+      event.type = type;
+      event.path = path;
 
       // Call next event, using the object instance as context
       eventsQueue[i].call(obj, event);
@@ -276,11 +274,20 @@
 
     // Cleanup the path and add the instance to the event path
     if (!this.path || !this.path.push) {
-      this.path = [];
+      // Opera and other browsers can throw exception if you are using native Event instance
+      try{
+        this.path = [];
+      }catch(e){}
+      
     }
 
     this.immediatePropagationStopped = this.immediatePropagationStopped === true;
     this.type = String(this.type);
+
+    // Add methods when they don't exist
+    this.initEvent = this.initEvent || ObjectEvent.prototype.initEvent;
+    this.preventDefault = this.preventDefault || ObjectEvent.prototype.preventDefault;
+    this.stopImmediatePropagation = this.stopImmediatePropagation || ObjectEvent.prototype.stopImmediatePropagation;
   };
   ObjectEvent.prototype.preventDefault = function(){
     // Prevent the default result, makes the dispatchEvent returns false
