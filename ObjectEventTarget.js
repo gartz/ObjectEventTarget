@@ -171,7 +171,9 @@
 
     // Reset and add the obj instance to path
     event.path.length = 0;
-    event.path.push && event.path.push(obj);
+    if (event.path.push){
+      event.path.push(obj);
+    }
     var path = event.path;
 
     // Clone the array before iterate, avoid event changing the queue on fly
@@ -306,7 +308,7 @@
         props[k] = {
           value: prototype[k],
           enumerable: false
-        }
+        };
       }
       return [prototype, props];
     };
