@@ -168,6 +168,7 @@
     var returnValue = true;
     var cancelable = !!event.cancelable;
     var defaultPrevented = !!event.defaultPrevented;
+    var type = event.type;
 
     // Reset and add the obj instance to path
     event.path.length = 0;
@@ -189,7 +190,7 @@
 
       // Call next event, using the object instance as context
       eventsQueue[i].call(obj, event);
-      
+
       // Update the returnValue when default has been prevented
       returnValue = returnValue && !(cancelable && event.defaultPrevented);
 
@@ -228,7 +229,7 @@
     };
     this.dispatchEvent = function(event){
       illegalIvovation(this);
-      dispatch(this, event);
+      return dispatch(this, event);
     };
   }
 
@@ -258,6 +259,8 @@
 
     this.path = [];
     this.immediatePropagationStopped = false;
+    this.defaultPrevented = false;
+    this.returnValue = true;
     this.type = String(type);
   }
   ObjectEvent.prototype.AT_TARGET = 2;
@@ -280,10 +283,11 @@
       try{
         this.path = [];
       }catch(e){}
-      
     }
 
     this.immediatePropagationStopped = this.immediatePropagationStopped === true;
+    this.defaultPrevented = this.cancelable && this.defaultPrevented === true;
+    this.returnValue = true;
     this.type = String(this.type);
 
     // Add methods when they don't exist
@@ -312,7 +316,7 @@
       }
       return [prototype, props];
     };
-    
+
     // ObjectEvent remove enumerable prototype
     Object.defineProperties.apply(Object, definePropertiesArgs(ObjectEvent.prototype));
     // ObjectEventTarget remove enumerable prototype
