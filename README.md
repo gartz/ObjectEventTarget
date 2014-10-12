@@ -98,3 +98,8 @@ When not available, because you probably used a literal object in the *dispatchE
 * **initEvent()** executed before the first callback in the queue be called, also keeps the integrity of your object with every required property and method been setup
 * **preventDefault()** will set *defaultPrevented* `true` when *cancelable* is `true`
 * **stopImmediatePropagation()** will stop the immidiate propagation of the callbacks of the event type in the current queue
+
+Projects Using it
+-----------------
+
+* [**Chronometer.js**](http://gartz.github.io/chronometer.js/) A chronometer constructor.
