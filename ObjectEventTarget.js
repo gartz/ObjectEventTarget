@@ -179,25 +179,31 @@
 
     // Clone the array before iterate, avoid event changing the queue on fly
     eventsQueue = eventsQueue.slice();
-    for (var i = 0, m = eventsQueue.length; i < m; i++) {
-      // Ensure non-writetible event properties states
-      event.eventPhase = ObjectEvent.prototype.AT_TARGET;
-      event.cancelable = cancelable;
-      event.returnValue = returnValue;
-      event.defaultPrevented = !returnValue;
-      event.type = type;
-      event.path = path;
+    try{
+      for (var i = 0, m = eventsQueue.length; i < m; i++) {
+        // Ensure non-writetible event properties states
+        event.eventPhase = ObjectEvent.prototype.AT_TARGET;
+        event.cancelable = cancelable;
+        event.returnValue = returnValue;
+        event.defaultPrevented = !returnValue;
+        event.type = type;
+        event.path = path;
 
-      // Call next event, using the object instance as context
-      eventsQueue[i].call(obj, event);
+        // Call next event, using the object instance as context
+        eventsQueue[i].call(obj, event);
 
-      // Update the returnValue when default has been prevented
-      returnValue = returnValue && !(cancelable && event.defaultPrevented);
+        // Update the returnValue when default has been prevented
+        returnValue = returnValue && !(cancelable && event.defaultPrevented);
 
-      // Stop the immidiate propagation and return the returnValue
-      if (event.immediatePropagationStopped) {
-        return returnValue;
+        // Stop the immidiate propagation and return the returnValue
+        if (event.immediatePropagationStopped) {
+          return returnValue;
+        }
       }
+    }catch(e){
+      setTimeout(function(){
+        throw e;
+      });
     }
 
     event.eventPhase = ObjectEvent.prototype.NONE;
