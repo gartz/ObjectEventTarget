@@ -10,6 +10,11 @@ You know as everybody knows how to use the EventTarget today, because every Node
 
 Also it can be used as prototype of a shim to EventTarget in non-modern browsers. Because it's compatible with ES3.
 
+Projects using it
+-----------------
+
+* [**Chronometer.js**](https://github.com/gartz/chronometer.js) This is just a chronometer constructor in JavaScript, that uses ObjectEventTarget as prototype to support events listeners, [*demo page*](http://gartz.github.io/chronometer.js/).
+
 How to use
 ----------
 
