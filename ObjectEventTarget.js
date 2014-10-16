@@ -17,22 +17,29 @@
 // methods will be iterated when you do for in, so don't forget to use the hasOwnProperty
 (function(root) {
   'use strict';
-  // Named object what contains the events queue for an object
-  function EventsMap(type, callback){
-    this[type] = [callback];
-  }
-  EventsMap.prototype = Object.prototype;
 
-  function typeErrors(type, callback){
+  // Load options that can be setup before loading the library
+  var options = root.ObjectEventTarget && root.ObjectEventTarget.options || {};
+
+  // Named object what contains the events queue for an object
+  var EventsMap = options.EventsMap;
+  if (!EventsMap){
+    EventsMap = function EventsMap(type, callback){
+      this[type] = [callback];
+    };
+    EventsMap.prototype = Object.prototype;
+  }
+
+  var typeErrors = function typeErrors(type, callback){
     if (typeof type !== 'string' || type.length === 0){
       throw new TypeError('Type must be a string and can\'t be empty');
     }
     if (typeof callback !== 'function'){
       throw new TypeError('Callback must be a function');
     }
-  }
+  };
 
-  var WeakMap = root.WeakMap;
+  var WeakMap = options.WeakMap || root.WeakMap;
   if (!WeakMap) {
     WeakMap = function WeakMapArrayShim(){
       // A simple shim for WeakMap, only for usage in this lib, so it doesn't
@@ -167,7 +174,6 @@
     // Prevent forcing event new values after begin the callback queue calls
     var returnValue = true;
     var cancelable = !!event.cancelable;
-    var defaultPrevented = !!event.defaultPrevented;
     var type = event.type;
 
     // Reset and add the obj instance to path
@@ -299,7 +305,11 @@
     // Add methods when they don't exist
     this.initEvent = this.initEvent || ObjectEvent.prototype.initEvent;
     this.preventDefault = this.preventDefault || ObjectEvent.prototype.preventDefault;
-    this.stopImmediatePropagation = this.stopImmediatePropagation || ObjectEvent.prototype.stopImmediatePropagation;
+    if (this.stopImmediatePropagation){
+      this.stopImmediatePropagation = this.stopImmediatePropagation;
+    } else {
+      this.stopImmediatePropagation = ObjectEvent.prototype.stopImmediatePropagation;
+    }
   };
   ObjectEvent.prototype.preventDefault = function(){
     // Prevent the default result, makes the dispatchEvent returns false
@@ -315,10 +325,12 @@
     var definePropertiesArgs = function (prototype){
       var props = {};
       for (var k in prototype) {
-        props[k] = {
-          value: prototype[k],
-          enumerable: false
-        };
+        if (prototype.hasOwnProperty(k)){
+          props[k] = {
+            value: prototype[k],
+            enumerable: false
+          };
+        }
       }
       return [prototype, props];
     };
@@ -331,6 +343,7 @@
 
   // Expose the ObjectEventTarget to global
   if (typeof window === 'undefined'){
+    // jshint node:true
     root = global;
   }
   root.ObjectEventTarget = ObjectEventTarget;

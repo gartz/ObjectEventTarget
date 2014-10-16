@@ -99,7 +99,33 @@ When not available, because you probably used a literal object in the *dispatchE
 * **preventDefault()** will set *defaultPrevented* `true` when *cancelable* is `true`
 * **stopImmediatePropagation()** will stop the immidiate propagation of the callbacks of the event type in the current queue
 
+Events Error Handling
+---------------------
+
+When a callback from a event type throw an error, it will result in same as *stopImmediatePropagation*.
+
+The throw will be show in your console, but will not stop your code flow that is expecting by the *dispatchEvent* result.
+
 Projects Using it
 -----------------
 
 * [**Chronometer.js**](http://gartz.github.io/chronometer.js/) A chronometer constructor.
+
+Overloading internals
+---------------------
+
+The **ObjectEventTarget** let you to overload it internal constructors to you personalize how it should work in your enviroment.
+
+* **EventsMap( type, callback )** is created to store the events and callbacks, where type must become a property where contains a array of callbacks. If the instance exists it will decorate with new types with array and it callbacks.
+* **WeakMap** is used to map the instances to it *EventsMap*, and must contain the methods **get( object )**, **set( object, value )**, **has( object )**, **delete( object )**.
+
+To do the overloading, before the lib is loaded you must create a object called **ObjectEventTarget** with the property **options**.
+
+```
+window.ObjectEventTarget = {
+  options: {
+    EventsMap: MyCustomEventsMap,
+    WeakMap: MyCustomWeakMap
+  }
+};
+```
