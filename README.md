@@ -14,6 +14,7 @@ Projects using it
 -----------------
 
 * [**Chronometer.js**](https://github.com/gartz/chronometer.js) This is just a chronometer constructor in JavaScript, that uses ObjectEventTarget as prototype to support events listeners, [*demo page*](http://gartz.github.io/chronometer.js/).
+* [**Entity**](https://github.com/gartz/Entity) This is a JavaScript micro lib that allows you to create entity with events of attribute manipulation.
 
 How to use
 ----------
