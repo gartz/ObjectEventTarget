@@ -30,14 +30,14 @@
     EventsMap.prototype = Object.prototype;
   }
 
-  var typeErrors = function typeErrors(type, callback){
+  function typeErrors(type, callback){
     if (typeof type !== 'string' || type.length === 0){
       throw new TypeError('Type must be a string and can\'t be empty');
     }
     if (typeof callback !== 'function'){
       throw new TypeError('Callback must be a function');
     }
-  };
+  }
 
   var WeakMap = options.WeakMap || root.WeakMap;
   if (!WeakMap) {
@@ -221,7 +221,7 @@
   function ObjectEventTarget(){
     // It's a singleton, once we have the instance for the prototype
     // the user should not be allowed to create new instances
-    if (ObjectEventTarget.prototype instanceof ObjectEventTarget){
+    if (ObjectEventTarget.prototype.constructor === ObjectEventTarget){
       throw new TypeError('Illegal constructor');
     }
 
@@ -231,14 +231,18 @@
       }
     }
 
+    this.constructor = ObjectEventTarget;
+
     this.addEventListener = function(type, callback){
       illegalIvovation(this);
       add(this, type, callback);
     };
+
     this.removeEventListener = function(type, callback){
       illegalIvovation(this);
       remove(this, type, callback);
     };
+
     this.dispatchEvent = function(event){
       illegalIvovation(this);
       return dispatch(this, event);
