@@ -14,20 +14,21 @@ Projects using it
 -----------------
 
 * [**Chronometer.js**](https://github.com/gartz/chronometer.js) This is just a chronometer constructor in JavaScript, that uses ObjectEventTarget as prototype to support events listeners, [*demo page*](http://gartz.github.io/chronometer.js/).
+* [**Entity**](https://github.com/gartz/Entity) This is a JavaScript micro lib that allows you to create entity with events of attribute manipulation.
 
 How to use
 ----------
 
 Prototype your constructor like this:
 
-```
+```Javascript
 function Foo(){}
 Foo.prototype = ObjectEventTarget.prototype;
 ```
 
 Now you have access to EventTarget methods, so let's implement a mehtod that dispatch a event type:
 
-```
+```Javascript
 function AsyncFoo(){
   this.bar = function(){
     if (this.dispatchEvent({type: 'beforebar'})){
@@ -49,7 +50,7 @@ AsyncFoo.prototype = ObjectEventTarget.prototype;
 
 Now you can add some events to you AsyncFoo instances like this:
 
-```
+```Javascript
 instanceOne = new AsyncFoo();
 instanceOne.addEventListener('beforebar', function (){
   console.log('You triggered bar from a AsyncFoo instance');
@@ -126,7 +127,7 @@ The **ObjectEventTarget** let you to overload it internal constructors to you pe
 
 To do the overloading, before the lib is loaded you must create a object called **ObjectEventTarget** with the property **options**.
 
-```
+```Javascript
 window.ObjectEventTarget = {
   options: {
     EventsMap: MyCustomEventsMap,
