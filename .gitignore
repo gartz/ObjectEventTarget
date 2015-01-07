@@ -61,3 +61,6 @@ npm-debug.log
 # Cloud9
 .c9revisions
 .settings
+
+# Grunt
+.grunt
