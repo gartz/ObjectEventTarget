@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" errors="4" tests="3" failures="2" time="0.016" timestamp="Tue Jan 06 2015 23:37:47 GMT-0800 (PST)">
+    
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="and updated ïmmediatePropagationStopped&quot;" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="even when it&#39;s a native event" time="0.001">
+        
+          <failure>Expected false to be true.</failure>
+        
+          <failure>Expected spy stopImmediatePropagation to have been called.</failure>
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="even when it&#39;s a literal object" time="0.001">
+        
+          <failure>Expected false to be true.</failure>
+        
+          <failure>Expected spy stopImmediatePropagation to have been called.</failure>
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

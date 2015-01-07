@@ -50,31 +50,118 @@ describe('ObjectEvent should', function() {
     expect(event.detail).toBe(myObject);
   });
 
-  it('be ran "initEvent" when dispatching a event', function(){
-    // Code coverage workaround:
-    var event = new ObjectEvent('test');
-    Emitter.dispatchEvent(event);
+  describe('be ran ïnitEvent"', function(){
+    it('when dispatching a event', function(){
+      // Code coverage workaround:
+      var event = new ObjectEvent('test');
+      Emitter.dispatchEvent(event);
 
-    // Now spy for testing:
-    spyOn(ObjectEvent.prototype, 'initEvent');
-    event = new ObjectEvent('test');
-    Emitter.dispatchEvent(event);
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'initEvent');
+      event = new ObjectEvent('test');
+      Emitter.dispatchEvent(event);
 
-    expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+      expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+    });
+
+    it('even when it\'s a native event', function(){
+      // Code coverage workaround:
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+      Emitter.dispatchEvent(event);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'initEvent');
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+    });
+
+    it('even when it\'s a literal object with type', function(){
+      // Code coverage workaround:
+      var event = {type: 'test'};
+      Emitter.dispatchEvent(event);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'initEvent');
+      event = {type: 'test'};
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+    });
   });
 
-  it('be ran "initEvent" even when it\'s a native event', function(){
-    // Code coverage workaround:
-    var event = document.createEvent('CustomEvent');
-    event.initCustomEvent('test', false, false, null);
-    Emitter.dispatchEvent(event);
+  describe('be able to ran "stopImmediatePropagation"', function(){
+    it('and updated ïmmediatePropagationStopped"', function(){
+      var event = new ObjectEvent('test');
 
-    // Now spy for testing:
-    spyOn(ObjectEvent.prototype, 'initEvent');
-    event = document.createEvent('CustomEvent');
-    event.initCustomEvent('test', false, false, null);
-    Emitter.dispatchEvent(event);
+      // False before it ran
+      expect(event.immediatePropagationStopped).toBe(false);
+      var listener = function(event){
+        event.stopImmediatePropagation();
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
 
-    expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+      // True outside
+      expect(event.immediatePropagationStopped).toBe(true);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'stopImmediatePropagation');
+      event = new ObjectEvent('test');
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.stopImmediatePropagation).toHaveBeenCalled();
+    });
+
+    it('even when it\'s a native event', function(){
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+
+      // False before it ran
+      expect(event.immediatePropagationStopped).toBe(undefined);
+      var listener = function(event){
+        event.stopImmediatePropagation();
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
+
+      // True outside
+      expect(event.immediatePropagationStopped).toBe(true);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'stopImmediatePropagation');
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.stopImmediatePropagation).toHaveBeenCalled();
+    });
+
+    it('even when it\'s a literal object', function(){
+      var event = {type: 'test'};
+
+      // False before it ran
+      expect(event.immediatePropagationStopped).toBe(undefined);
+      var listener = function(event){
+        event.stopImmediatePropagation();
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
+
+      // True outside
+      expect(event.immediatePropagationStopped).toBe(true);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'stopImmediatePropagation');
+      event = {type: 'test'};
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.stopImmediatePropagation).toHaveBeenCalled();
+    });
   });
+
+  
 });
