@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="ObjectEvent should" errors="0" tests="7" failures="0" time="0.012" timestamp="Tue Jan 06 2015 23:00:31 GMT-0800 (PST)">
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="be available on global scope" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="throw an error if not using &quot;new&quot; operator" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="throw an error if construct with no arguments" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="allow any value that can be parsed to a string as type parameter" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="allow add detail property in the seccond param object" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="be ran &quot;initEvent&quot; when dispatching a event" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should" name="be ran &quot;initEvent&quot; even when it&#39;s a native event" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

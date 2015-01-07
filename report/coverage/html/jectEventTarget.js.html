@@ -1,0 +1,1411 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for ObjectEventTarget.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">ObjectEventTarget.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">49.12% <small>(84 / 171)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">35.48% <small>(33 / 93)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">47.83% <small>(11 / 23)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">49.12% <small>(84 / 171)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">./</a> &#187; jectEventTarget.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">15</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Add a ObjectEventTarget with a prototype that can be used
+// by any object in the JavaScript context, to add, remove and trigger
+// events.
+// Example:
+// ```
+// function Foo(){}
+// Foo.prototype = ObjectEventTarget.prototype;
+// foo = new Foo();
+// foo.addEventListener('dosomething', function(){
+//   console.log(this, 'do something');
+// });
+// foo.dispatchEvent({type: 'dosomething'});
+// // [Foo object], do something
+// ```
+//
+// In old browsers that doesn't support enumerable property definition, the prototype
+// methods will be iterated when you do for in, so don't forget to use the hasOwnProperty
+(function(root) {
+  'use strict';
+&nbsp;
+  // Load options that can be setup before loading the library
+  var options = root.ObjectEventTarget &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >root.ObjectEventTarget.options </span>|| {};
+&nbsp;
+  // Named object what contains the events queue for an object
+  var EventsMap = options.EventsMap;
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (!EventsMap){
+    EventsMap = <span class="fstat-no" title="function not covered" >function EventsMap(type, callback){</span>
+<span class="cstat-no" title="statement not covered" >      this[type] = [callback];</span>
+    };
+    EventsMap.prototype = Object.prototype;
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function typeErrors(type, callback){</span>
+<span class="cstat-no" title="statement not covered" >    if (typeof type !== 'string' || type.length === 0){</span>
+<span class="cstat-no" title="statement not covered" >      throw new TypeError('Type must be a string and can\'t be empty');</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (typeof callback !== 'function'){</span>
+<span class="cstat-no" title="statement not covered" >      throw new TypeError('Callback must be a function');</span>
+    }
+  }
+&nbsp;
+  var WeakMap = options.WeakMap || root.WeakMap;
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (!WeakMap) {
+    WeakMap = function WeakMapArrayShim(){
+      // A simple shim for WeakMap, only for usage in this lib, so it doesn't
+      // support all features from a WeakMap, and it uses Array.indexOf for
+      // search that isn't very performatic but allow us to have support in
+      // old browsers
+&nbsp;
+      this.map = [];
+    };
+    var find = function (arr, key){
+      // Search for a meta element for the WeakMap shim, and if found
+      // move this element for the begin of the array, to optimize usual
+      // repetitive usage of the same object, and fast find the most used
+&nbsp;
+      for (var i = 0, m = arr.length; i &lt; m; i++){
+<span class="cstat-no" title="statement not covered" >        if (arr[i].key === key) {</span>
+<span class="cstat-no" title="statement not covered" >          if (i &gt; 0){</span>
+<span class="cstat-no" title="statement not covered" >            var r = arr.splice(i, 1);</span>
+<span class="cstat-no" title="statement not covered" >            arr.unshift(r);</span>
+<span class="cstat-no" title="statement not covered" >            return r;</span>
+          }
+<span class="cstat-no" title="statement not covered" >          return arr[i];</span>
+        }
+      }
+      return;
+    };
+    WeakMap.prototype = {
+      get: function (obj){
+        var meta = find(this.map, obj);
+        return meta &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >meta.value;</span>
+      },
+      set: <span class="fstat-no" title="function not covered" >function (obj, value){</span>
+<span class="cstat-no" title="statement not covered" >        var meta = find(this.map, obj);</span>
+<span class="cstat-no" title="statement not covered" >        if (meta){</span>
+<span class="cstat-no" title="statement not covered" >          meta.value = value;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          this.map.push({key: obj, value: value});</span>
+        }
+      },
+      has: <span class="fstat-no" title="function not covered" >function (obj){</span>
+<span class="cstat-no" title="statement not covered" >        return !!find(this.map, obj);</span>
+      },
+      delete: <span class="fstat-no" title="function not covered" >function (obj){</span>
+<span class="cstat-no" title="statement not covered" >        var meta = find(this.map, obj);</span>
+<span class="cstat-no" title="statement not covered" >        if (meta) {</span>
+<span class="cstat-no" title="statement not covered" >          this.map.shift();</span>
+        }
+      }
+    };
+  }
+&nbsp;
+  var map = new WeakMap();
+<span class="fstat-no" title="function not covered" >  function add(obj, type, callback){</span>
+    // Add a object with a event type and callback to a weakmap
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    typeErrors(type, callback);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (map.has(obj)) {</span>
+<span class="cstat-no" title="statement not covered" >      if (map.get(obj)[type]) {</span>
+<span class="cstat-no" title="statement not covered" >        map.get(obj)[type].push(callback);</span>
+<span class="cstat-no" title="statement not covered" >        return;</span>
+      }
+<span class="cstat-no" title="statement not covered" >      map.get(obj)[type] = [callback];</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    map.set(obj, new EventsMap(type, callback));</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  function remove(obj, type, callback){</span>
+    // Removes the callback from the event queue and keep the memory clean
+    // removing empty events queue and objects without events from the map
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    typeErrors(type, callback);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!map.has(obj)){</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var eventsMap = map.get(obj);</span>
+<span class="cstat-no" title="statement not covered" >    var eventQueue = eventsMap[type];</span>
+<span class="cstat-no" title="statement not covered" >    if (!eventQueue){</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var pos = eventQueue.indexOf(callback);</span>
+<span class="cstat-no" title="statement not covered" >    if (pos === -1){</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+    // Remove all matching callbacks
+<span class="cstat-no" title="statement not covered" >    while(pos !== -1){</span>
+<span class="cstat-no" title="statement not covered" >      eventQueue.splice(pos, 1);</span>
+<span class="cstat-no" title="statement not covered" >      pos = eventQueue.indexOf(callback);</span>
+    }
+&nbsp;
+    // Remove the propertie with array when the array is empty
+<span class="cstat-no" title="statement not covered" >    if (eventQueue.length === 0){</span>
+<span class="cstat-no" title="statement not covered" >      delete eventsMap[type];</span>
+    }
+&nbsp;
+    // If the eventsMap isn't empty don't remove from the objects weakmap
+<span class="cstat-no" title="statement not covered" >    for (var prop in eventsMap)</span>
+<span class="cstat-no" title="statement not covered" >    if (eventsMap.hasOwnProperty(prop)) {</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    map.delete(obj);</span>
+  }
+&nbsp;
+  function dispatch(obj, event){
+    // Dispatch a queue of events of the tye passed inside the event object
+&nbsp;
+    // Check if the event is a valid object
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!event || typeof event.type !== 'string'){
+<span class="cstat-no" title="statement not covered" >      throw new TypeError('Illegal invocation');</span>
+    }
+&nbsp;
+    // Init the event
+    ObjectEvent.prototype.initEvent.call(event);
+&nbsp;
+    var eventsMap = map.get(obj);
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!eventsMap) {
+      return true;
+    }
+<span class="cstat-no" title="statement not covered" >    var eventsQueue = eventsMap[event.type];</span>
+<span class="cstat-no" title="statement not covered" >    if (!eventsQueue) {</span>
+<span class="cstat-no" title="statement not covered" >      return true;</span>
+    }
+&nbsp;
+    // Prevent event to be triggered more then one time
+    // if you preventDefault the event should be triggered again
+<span class="cstat-no" title="statement not covered" >    if (event.path.length !== 0 &amp;&amp; event.returnValue) {</span>
+<span class="cstat-no" title="statement not covered" >      return true;</span>
+    }
+&nbsp;
+    // Prevent forcing event new values after begin the callback queue calls
+<span class="cstat-no" title="statement not covered" >    var returnValue = true;</span>
+<span class="cstat-no" title="statement not covered" >    var cancelable = !!event.cancelable;</span>
+<span class="cstat-no" title="statement not covered" >    var type = event.type;</span>
+&nbsp;
+    // Reset and add the obj instance to path
+<span class="cstat-no" title="statement not covered" >    event.path.length = 0;</span>
+<span class="cstat-no" title="statement not covered" >    if (event.path.push){</span>
+<span class="cstat-no" title="statement not covered" >      event.path.push(obj);</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var path = event.path;</span>
+&nbsp;
+    // Clone the array before iterate, avoid event changing the queue on fly
+<span class="cstat-no" title="statement not covered" >    eventsQueue = eventsQueue.slice();</span>
+<span class="cstat-no" title="statement not covered" >    try{</span>
+<span class="cstat-no" title="statement not covered" >      for (var i = 0, m = eventsQueue.length; i &lt; m; i++) {</span>
+        // Ensure non-writetible event properties states
+<span class="cstat-no" title="statement not covered" >        event.eventPhase = ObjectEvent.prototype.AT_TARGET;</span>
+<span class="cstat-no" title="statement not covered" >        event.cancelable = cancelable;</span>
+<span class="cstat-no" title="statement not covered" >        event.returnValue = returnValue;</span>
+<span class="cstat-no" title="statement not covered" >        event.defaultPrevented = !returnValue;</span>
+<span class="cstat-no" title="statement not covered" >        event.type = type;</span>
+<span class="cstat-no" title="statement not covered" >        event.path = path;</span>
+&nbsp;
+        // Call next event, using the object instance as context
+<span class="cstat-no" title="statement not covered" >        eventsQueue[i].call(obj, event);</span>
+&nbsp;
+        // Update the returnValue when default has been prevented
+<span class="cstat-no" title="statement not covered" >        returnValue = returnValue &amp;&amp; !(cancelable &amp;&amp; event.defaultPrevented);</span>
+&nbsp;
+        // Stop the immidiate propagation and return the returnValue
+<span class="cstat-no" title="statement not covered" >        if (event.immediatePropagationStopped) {</span>
+<span class="cstat-no" title="statement not covered" >          return returnValue;</span>
+        }
+      }
+    }catch(e){
+<span class="cstat-no" title="statement not covered" >      setTimeout(<span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >        throw e;</span>
+      });
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    event.eventPhase = ObjectEvent.prototype.NONE;</span>
+&nbsp;
+    // true if default hasn't been prevented
+<span class="cstat-no" title="statement not covered" >    return returnValue;</span>
+  }
+&nbsp;
+  function ObjectEventTarget(){
+    // It's a singleton, once we have the instance for the prototype
+    // the user should not be allowed to create new instances
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (ObjectEventTarget.prototype.constructor === ObjectEventTarget){
+<span class="cstat-no" title="statement not covered" >      throw new TypeError('Illegal constructor');</span>
+    }
+&nbsp;
+    function illegalIvovation(context){
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (context === ObjectEventTarget.prototype) {
+<span class="cstat-no" title="statement not covered" >        throw new TypeError('Illegal invocation');</span>
+      }
+    }
+&nbsp;
+    this.constructor = ObjectEventTarget;
+&nbsp;
+    this.addEventListener = <span class="fstat-no" title="function not covered" >function(type, callback){</span>
+<span class="cstat-no" title="statement not covered" >      illegalIvovation(this);</span>
+<span class="cstat-no" title="statement not covered" >      add(this, type, callback);</span>
+    };
+&nbsp;
+    this.removeEventListener = <span class="fstat-no" title="function not covered" >function(type, callback){</span>
+<span class="cstat-no" title="statement not covered" >      illegalIvovation(this);</span>
+<span class="cstat-no" title="statement not covered" >      remove(this, type, callback);</span>
+    };
+&nbsp;
+    this.dispatchEvent = function(event){
+      illegalIvovation(this);
+      return dispatch(this, event);
+    };
+  }
+&nbsp;
+  ObjectEventTarget.prototype = Object.prototype;
+  ObjectEventTarget.prototype = new ObjectEventTarget();
+&nbsp;
+  function ObjectEvent(type, options){
+    if (arguments.length === 0){
+      throw new TypeError('Failed to construct \'ObjectEvent\': An event name must be provided.');
+    }
+&nbsp;
+    options = options || {};
+&nbsp;
+    // Time that the event has created
+    this.timeStamp = Date.now();
+&nbsp;
+    // Allow preventDefault()
+    this.cancelable = options.cancelable === true;
+&nbsp;
+    // Add custom details to the event
+    if (typeof options.detail !== 'undefined') {
+      this.detail = options.detail;
+    }
+&nbsp;
+    // Phase of the event
+    this.eventPhase = ObjectEvent.prototype.NONE;
+&nbsp;
+    this.path = [];
+    this.immediatePropagationStopped = false;
+    this.defaultPrevented = false;
+    this.returnValue = true;
+    this.type = String(type);
+  }
+  ObjectEvent.prototype.AT_TARGET = 2;
+  ObjectEvent.prototype.NONE = 0;
+  ObjectEvent.prototype.initEvent = function() {
+    // Init event if it has some propertie wrong, fix it
+&nbsp;
+    // Time that the event has created
+    this.timeStamp = this.timeStamp || <span class="branch-1 cbranch-no" title="branch not covered" >Date.now();</span>
+&nbsp;
+    // Allow preventDefault()
+    this.cancelable = this.cancelable === true;
+&nbsp;
+    // Phase of the event
+    this.eventPhase = ObjectEvent.prototype.NONE;
+&nbsp;
+    // Cleanup the path and add the instance to the event path
+    if (!this.path || !this.path.push) {
+      // Opera and other browsers can throw exception if you are using native Event instance
+      try{
+        this.path = [];
+      }catch(e){}
+    }
+&nbsp;
+    this.immediatePropagationStopped = this.immediatePropagationStopped === true;
+    this.defaultPrevented = this.cancelable &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >this.defaultPrevented === true;</span>
+    this.returnValue = true;
+    this.type = String(this.type);
+&nbsp;
+    // Add methods when they don't exist
+    this.initEvent = this.initEvent || <span class="branch-1 cbranch-no" title="branch not covered" >ObjectEvent.prototype.initEvent;</span>
+    this.preventDefault = this.preventDefault || <span class="branch-1 cbranch-no" title="branch not covered" >ObjectEvent.prototype.preventDefault;</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.stopImmediatePropagation){
+      this.stopImmediatePropagation = this.stopImmediatePropagation;
+    } else {
+<span class="cstat-no" title="statement not covered" >      this.stopImmediatePropagation = ObjectEvent.prototype.stopImmediatePropagation;</span>
+    }
+  };
+  ObjectEvent.prototype.preventDefault = <span class="fstat-no" title="function not covered" >function(){</span>
+    // Prevent the default result, makes the dispatchEvent returns false
+<span class="cstat-no" title="statement not covered" >    this.defaultPrevented = !!this.cancelable;</span>
+  };
+  ObjectEvent.prototype.stopImmediatePropagation = <span class="fstat-no" title="function not covered" >function(){</span>
+    // Don't allow the next callback to be called
+<span class="cstat-no" title="statement not covered" >    this.immediatePropagationStopped = true;</span>
+  };
+&nbsp;
+  // Prevent enumerable prototype when supported by the browser
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (Object.defineProperties){
+    var definePropertiesArgs = function (prototype){
+      var props = {};
+      for (var k in prototype) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (prototype.hasOwnProperty(k)){
+          props[k] = {
+            value: prototype[k],
+            enumerable: false
+          };
+        }
+      }
+      return [prototype, props];
+    };
+&nbsp;
+    // ObjectEvent remove enumerable prototype
+    Object.defineProperties.apply(Object, definePropertiesArgs(ObjectEvent.prototype));
+    // ObjectEventTarget remove enumerable prototype
+    Object.defineProperties.apply(Object, definePropertiesArgs(ObjectEventTarget.prototype));
+  }
+&nbsp;
+  // Expose the ObjectEventTarget to global
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof window === 'undefined'){
+    // jshint node:true
+<span class="cstat-no" title="statement not covered" >    root = global;</span>
+  }
+  root.ObjectEventTarget = ObjectEventTarget;
+  root.ObjectEvent = ObjectEvent;
+&nbsp;
+  // Export as module to nodejs
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof module !== 'undefined' &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof module.exports !== 'undefined')</span>{
+<span class="cstat-no" title="statement not covered" >    module.exports = {</span>
+      ObjectEventTarget: ObjectEventTarget,
+      ObjectEvent: ObjectEvent
+    };
+  }
+})(this);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Jan 06 2015 23:00:31 GMT-0800 (PST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>
