@@ -1,7 +1,3 @@
-//! ObjectEventTarget - v1.1.0 - 2015-01-07
-//* https://github.com/gartz/ObjectEventTarget/
-//* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
-
 // Add a ObjectEventTarget with a prototype that can be used
 // by any object in the JavaScript context, to add, remove and trigger
 // events.
@@ -313,14 +309,10 @@
     // Add methods when they don't exist
     this.initEvent = this.initEvent || ObjectEvent.prototype.initEvent;
     this.preventDefault = this.preventDefault || ObjectEvent.prototype.preventDefault;
-    if (!(this instanceof ObjectEvent)){
-      if (!this.hasOwnProperty('stopImmediatePropagation')){
-        var native = this.stopImmediatePropagation;
-        this.stopImmediatePropagation = function(){
-          native.apply(this, arguments);
-          ObjectEvent.prototype.stopImmediatePropagation.apply(this, arguments);
-        };
-      }
+    if (this.stopImmediatePropagation){
+      this.stopImmediatePropagation = this.stopImmediatePropagation;
+    } else {
+      this.stopImmediatePropagation = ObjectEvent.prototype.stopImmediatePropagation;
     }
   };
   ObjectEvent.prototype.preventDefault = function(){
