@@ -311,13 +311,25 @@
     this.type = String(this.type);
 
     // Add methods when they don't exist
-    this.initEvent = this.initEvent || ObjectEvent.prototype.initEvent;
-    this.preventDefault = this.preventDefault || ObjectEvent.prototype.preventDefault;
     if (!(this instanceof ObjectEvent)){
+      if (!this.hasOwnProperty('initEvent')){
+        var nativeInitEvent = this.initEvent;
+        this.initEvent = function(){
+          nativeInitEvent.apply(this, arguments);
+          ObjectEvent.prototype.initEvent.apply(this, arguments);
+        };
+      }
+      if (!this.hasOwnProperty('preventDefault')){
+        var nativePreventDefault = this.preventDefault;
+        this.preventDefault = function(){
+          nativePreventDefault.apply(this, arguments);
+          ObjectEvent.prototype.preventDefault.apply(this, arguments);
+        };
+      }
       if (!this.hasOwnProperty('stopImmediatePropagation')){
-        var native = this.stopImmediatePropagation;
+        var nativeStopImmediatePropagation = this.stopImmediatePropagation;
         this.stopImmediatePropagation = function(){
-          native.apply(this, arguments);
+          nativeStopImmediatePropagation.apply(this, arguments);
           ObjectEvent.prototype.stopImmediatePropagation.apply(this, arguments);
         };
       }
