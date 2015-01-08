@@ -4,11 +4,11 @@ module.exports = function(grunt) {
     meta: {
       pkg: grunt.file.readJSON('package.json'),
       src: {
-        main: 'ObjectEventTarget.js',
+        main: 'src/**/*.js',
         test: 'test/specs/**/*.js',
         helper: 'test/helpers/**/*.js',
         polyfill: [
-          'bower_components/WeakMap/WeakMap.js'
+          //'bower_components/WeakMap/WeakMap.js'
         ]
       },
       dist: '<%= meta.pkg.name %>.min.js',
@@ -19,9 +19,9 @@ module.exports = function(grunt) {
       },
       banner: '//! <%= meta.pkg.title || meta.pkg.name %> - v<%= meta.pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= meta.pkg.homepage ? "* " + meta.pkg.homepage + "\\n" : "" %>' +
-        '//* Copyright (c) <%= grunt.template.today("yyyy") %> <%= meta.pkg.author %>;' +
-        ' Licensed <%= meta.pkg.license %>\n'
+        '//<%= meta.pkg.homepage ? "* " + meta.pkg.homepage + "\\n" : "" %>' +
+        '//* Copyright (c) <%= grunt.template.today("yyyy") %> <%= meta.pkg.author.name %>;' +
+        ' Licensed <%= meta.pkg.license %>\n\n'
     },
     connect: {
       report: {
