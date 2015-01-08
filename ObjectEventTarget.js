@@ -1,4 +1,4 @@
-//! ObjectEventTarget - v1.1.0 - 2015-01-07
+//! ObjectEventTarget - v1.1.1 - 2015-01-08
 //* https://github.com/gartz/ObjectEventTarget/
 //* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
@@ -313,21 +313,21 @@
     // Add methods when they don't exist
     if (!(this instanceof ObjectEvent)){
       if (!this.hasOwnProperty('initEvent')){
-        var nativeInitEvent = this.initEvent;
+        var nativeInitEvent = this.initEvent || function(){};
         this.initEvent = function(){
           nativeInitEvent.apply(this, arguments);
           ObjectEvent.prototype.initEvent.apply(this, arguments);
         };
       }
       if (!this.hasOwnProperty('preventDefault')){
-        var nativePreventDefault = this.preventDefault;
+        var nativePreventDefault = this.preventDefault || function(){};
         this.preventDefault = function(){
           nativePreventDefault.apply(this, arguments);
           ObjectEvent.prototype.preventDefault.apply(this, arguments);
         };
       }
       if (!this.hasOwnProperty('stopImmediatePropagation')){
-        var nativeStopImmediatePropagation = this.stopImmediatePropagation;
+        var nativeStopImmediatePropagation = this.stopImmediatePropagation || function(){};
         this.stopImmediatePropagation = function(){
           nativeStopImmediatePropagation.apply(this, arguments);
           ObjectEvent.prototype.stopImmediatePropagation.apply(this, arguments);
