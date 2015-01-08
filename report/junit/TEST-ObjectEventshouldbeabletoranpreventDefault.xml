@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="ObjectEvent should be able to ran &quot;preventDefault&quot;" errors="0" tests="2" failures="0" time="0.002" timestamp="Wed Jan 07 2015 23:34:07 GMT-0800 (PST)">
+    
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;preventDefault&quot;" name="return true when not cancelable event" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;preventDefault&quot;" name="return false when cancelable event" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

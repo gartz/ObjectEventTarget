@@ -1,0 +1,9 @@
+{
+	"name": "ObjectEventTarget",
+	"version": "1.1.0",
+	"description": "A same behaviour EventTarget prototype, that can work with any object from JavaScript",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/gartz/ObjectEventTarget.git"
+	}
+}
