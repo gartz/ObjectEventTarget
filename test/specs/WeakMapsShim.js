@@ -2,7 +2,7 @@
 /*globals ObjectEventTarget*/
 describe('ObjectEventTarget should', function(){
   it('be in the DEBUG mode', function(){
-    expect(ObjectEventTarget.prototype.__debug).toBeDefined();
+    expect(ObjectEventTarget.__debug).toBeDefined();
   });
 });
 describe('WeakMapsShim should', function() {
@@ -11,7 +11,7 @@ describe('WeakMapsShim should', function() {
   var map;
 
   beforeEach(function() {
-    guts = ObjectEventTarget.prototype.__debug;
+    guts = ObjectEventTarget.__debug;
     if( guts && guts.WeakMap ){
       map = new guts.WeakMap();
     }

@@ -1,13 +1,13 @@
 <?xml version="1.0" ?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage lines-valid="186"  lines-covered="145"  line-rate="0.7796"  branches-valid="107"  branches-covered="71"  branch-rate="0.6636"  timestamp="1420765060829" complexity="0" version="0.1">
+<coverage lines-valid="187"  lines-covered="146"  line-rate="0.7807"  branches-valid="107"  branches-covered="71"  branch-rate="0.6636"  timestamp="1420765264107" complexity="0" version="0.1">
 <sources>
 	<source>/Users/gartz/Projects/ObjectEventTarget</source>
 </sources>
 <packages>
-	<package name="src"  line-rate="0.7796"  branch-rate="0.6636" >
+	<package name="src"  line-rate="0.7807"  branch-rate="0.6636" >
 	<classes>
-		<class name="ObjectEventTarget.js"  filename="src/ObjectEventTarget.js"  line-rate="0.7796"  branch-rate="0.6636" >
+		<class name="ObjectEventTarget.js"  filename="src/ObjectEventTarget.js"  line-rate="0.7807"  branch-rate="0.6636" >
 		<methods>
 			<method name="(anonymous_1)"  hits="1"  signature="()V" >
 				<lines><line number="18"  hits="1" /></lines>
@@ -280,10 +280,11 @@
 			<line number="370"  hits="1"  branch="false" />
 			<line number="371"  hits="1"  branch="false" />
 			<line number="372"  hits="1"  branch="false" />
-			<line number="374"  hits="1"  branch="true"  condition-coverage="50% (1/2)" />
-			<line number="375"  hits="1"  branch="false" />
-			<line number="384"  hits="1"  branch="true"  condition-coverage="50% (2/4)" />
-			<line number="385"  hits="0"  branch="false" />
+			<line number="374"  hits="1"  branch="false" />
+			<line number="375"  hits="1"  branch="true"  condition-coverage="50% (1/2)" />
+			<line number="376"  hits="1"  branch="false" />
+			<line number="385"  hits="1"  branch="true"  condition-coverage="50% (2/4)" />
+			<line number="386"  hits="0"  branch="false" />
 		</lines>
 		</class>
 	</classes>

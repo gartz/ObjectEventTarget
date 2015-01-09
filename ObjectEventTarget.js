@@ -376,8 +376,9 @@ var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
   root.ObjectEventTarget = ObjectEventTarget;
   root.ObjectEvent = ObjectEvent;
 
+  ObjectEventTarget.DEBUG = DEBUG;
   if (DEBUG){
-    ObjectEventTarget.prototype.__debug = {
+    ObjectEventTarget.__debug = {
       EventsMap: EventsMap,
       typeErrors: typeErrors,
       WeakMap: WeakMap,
