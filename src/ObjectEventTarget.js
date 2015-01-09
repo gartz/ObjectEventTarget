@@ -309,22 +309,21 @@
 
     // Add methods when they don't exist
     if (!(this instanceof ObjectEvent)){
-      if (!this.hasOwnProperty('initEvent')){
-        var nativeInitEvent = this.initEvent || function(){};
-        this.initEvent = function(){
-          nativeInitEvent.apply(this, arguments);
-          ObjectEvent.prototype.initEvent.apply(this, arguments);
-        };
-      }
       if (!this.hasOwnProperty('preventDefault')){
-        var nativePreventDefault = this.preventDefault || function(){};
+        var nativePreventDefault = this.preventDefault;
+        if (typeof nativePreventDefault !== 'function'){
+          nativePreventDefault = function(){};
+        }
         this.preventDefault = function(){
           nativePreventDefault.apply(this, arguments);
           ObjectEvent.prototype.preventDefault.apply(this, arguments);
         };
       }
       if (!this.hasOwnProperty('stopImmediatePropagation')){
-        var nativeStopImmediatePropagation = this.stopImmediatePropagation || function(){};
+        var nativeStopImmediatePropagation = this.stopImmediatePropagation;
+        if (typeof stopImmediatePropagation !== 'function'){
+          nativeStopImmediatePropagation = function(){};
+        }
         this.stopImmediatePropagation = function(){
           nativeStopImmediatePropagation.apply(this, arguments);
           ObjectEvent.prototype.stopImmediatePropagation.apply(this, arguments);
@@ -363,10 +362,6 @@
   }
 
   // Expose the ObjectEventTarget to global
-  if (typeof window === 'undefined'){
-    // jshint node:true
-    root = global;
-  }
   ObjectEventTarget.VERSION = VERSION;
   root.ObjectEventTarget = ObjectEventTarget;
   root.ObjectEvent = ObjectEvent;

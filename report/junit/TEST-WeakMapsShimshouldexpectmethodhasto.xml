@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="WeakMapsShim should expect method &quot;has&quot; to" errors="0" tests="3" failures="0" time="0.002" timestamp="Thu Jan 08 2015 20:30:24 GMT-0800 (PST)">
+  <testsuite name="WeakMapsShim should expect method &quot;has&quot; to" errors="0" tests="3" failures="0" time="0.019" timestamp="Thu Jan 08 2015 21:14:48 GMT-0800 (PST)">
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return true when the object exist" time="0">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return true when the object exist" time="0.002">
         
       </testcase>
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return false when the object doesn&#39;t exist" time="0">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return false when the object doesn&#39;t exist" time="0.002">
         
       </testcase>
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return false when the object has been deleted" time="0.001">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;has&quot; to" name="return false when the object has been deleted" time="0.003">
         
       </testcase>
     

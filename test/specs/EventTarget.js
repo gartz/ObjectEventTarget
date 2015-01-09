@@ -282,5 +282,58 @@ describe('ObjectEvent should', function() {
       Emitter.addEventListener('test2', listener);
       Emitter.dispatchEvent(event);
     });
+
+    it('return true when not cancelable event of literal object', function(){
+      var event = {type: 'test'};
+
+      // False before it ran
+      expect(event.defaultPrevented).toBeUndefined();
+      var listener = function(event){
+        event.preventDefault();
+        expect(event.defaultPrevented).toBe(false);
+      };
+      Emitter.addEventListener('test', listener);
+      expect(Emitter.dispatchEvent(event)).toBe(true);
+
+      // True outside
+      expect(event.immediatePropagationStopped).toBe(false);
+
+      // Now spy for testing:
+      event = {type: 'test2'};
+      listener = function(event){
+        spyOn(ObjectEvent.prototype, 'preventDefault');
+        event.preventDefault();
+        expect(ObjectEvent.prototype.preventDefault).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
+
+    it('return false when cancelable event of literal object', function(){
+      var event = {type: 'test', cancelable: true};
+
+      // False before it ran
+      expect(event.defaultPrevented).toBeUndefined();
+      var listener = function(event){
+        event.preventDefault();
+        expect(event.defaultPrevented).toBe(true);
+      };
+      Emitter.addEventListener('test', listener);
+      var result = Emitter.dispatchEvent(event);
+      expect(result).toBe(false);
+
+      // True outside
+      expect(event.defaultPrevented).toBe(true);
+
+      // Now spy for testing:
+      event = {type: 'test2', cancelable: true};
+      listener = function(event){
+        spyOn(ObjectEvent.prototype, 'preventDefault');
+        event.preventDefault();
+        expect(ObjectEvent.prototype.preventDefault).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
   });
 });
