@@ -216,7 +216,7 @@ describe('ObjectEvent should', function() {
       expect(result).toBe(false);
 
       // True outside
-      //expect(event.immediatePropagationStopped).toBe(true);
+      expect(event.defaultPrevented).toBe(true);
 
       // Now spy for testing:
       event = new ObjectEvent('test2', {cancelable: true});
