@@ -20,6 +20,8 @@
 
   // Load options that can be setup before loading the library
   var options = root.ObjectEventTarget && root.ObjectEventTarget.options || {};
+  var DEBUG = root.DEBUG || options.DEBUG;
+  var VERSION = options.VERSION || 'development';
 
   // Named object what contains the events queue for an object
   var EventsMap = options.EventsMap;
@@ -54,14 +56,13 @@
       // move this element for the begin of the array, to optimize usual
       // repetitive usage of the same object, and fast find the most used
 
-      for (var i = 0, m = arr.length; i < m; i++){
+      for (var m = arr.length, i = m - 1; i >= 0; i--){
         if (arr[i].key === key) {
-          if (i > 0){
+          if (i !== m){
             var r = arr.splice(i, 1);
-            arr.unshift(r);
-            return r;
+            arr.push(r[0]);
           }
-          return arr[i];
+          return arr[m - 1];
         }
       }
       return;
@@ -366,8 +367,18 @@
     // jshint node:true
     root = global;
   }
+  ObjectEventTarget.VERSION = VERSION;
   root.ObjectEventTarget = ObjectEventTarget;
   root.ObjectEvent = ObjectEvent;
+
+  if (DEBUG){
+    ObjectEventTarget.prototype.__debug = {
+      EventsMap: EventsMap,
+      typeErrors: typeErrors,
+      WeakMap: WeakMap,
+      map: map
+    };
+  }
 
   // Export as module to nodejs
   if (typeof module !== 'undefined' && typeof module.exports !== 'undefined'){

@@ -21,7 +21,8 @@ module.exports = function(grunt) {
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '//<%= meta.pkg.homepage ? "* " + meta.pkg.homepage + "\\n" : "" %>' +
         '//* Copyright (c) <%= grunt.template.today("yyyy") %> <%= meta.pkg.author.name %>;' +
-        ' Licensed <%= meta.pkg.license %>\n\n'
+        ' Licensed <%= meta.pkg.license %>\n\n' +
+        'var ObjectEventTarget = {options: {VERSION: \'<%= meta.pkg.version %>\'}};\n'
     },
     connect: {
       report: {

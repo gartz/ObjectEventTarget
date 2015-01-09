@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" errors="1" tests="3" failures="1" time="0.003" timestamp="Thu Jan 08 2015 00:12:57 GMT-0800 (PST)">
+  <testsuite name="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" errors="0" tests="3" failures="0" time="0.003" timestamp="Thu Jan 08 2015 16:57:40 GMT-0800 (PST)">
     
       <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="and updated ïmmediatePropagationStopped&quot;" time="0.001">
         
@@ -9,11 +9,9 @@
     
       <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="even when it&#39;s a native event" time="0.001">
         
-          <failure><![CDATA[Expected false to be true.]]></failure>
-        
       </testcase>
     
-      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="even when it&#39;s a literal object" time="0">
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="even when it&#39;s a literal object" time="0.001">
         
       </testcase>
     

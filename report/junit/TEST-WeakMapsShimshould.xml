@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="WeakMapsShim should" errors="0" tests="5" failures="0" time="0.009" timestamp="Thu Jan 08 2015 16:57:40 GMT-0800 (PST)">
+    
+      <testcase assertions="0" classname="WeakMapsShim should" name="be available on debug mode" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="WeakMapsShim should" name="have the method &quot;get&quot;" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="WeakMapsShim should" name="have the method &quot;set&quot;" time="0.004">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="WeakMapsShim should" name="have the method &quot;has&quot;" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="WeakMapsShim should" name="have the method &quot;delete&quot;" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

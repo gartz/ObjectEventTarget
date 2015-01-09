@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="WeakMapsShim should expect method &quot;set&quot; to" errors="0" tests="2" failures="0" time="0.001" timestamp="Thu Jan 08 2015 16:57:40 GMT-0800 (PST)">
+    
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;set&quot; to" name="add new element for each different object added" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;set&quot; to" name="change reference values of existing objects" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>
