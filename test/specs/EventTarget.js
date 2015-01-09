@@ -133,7 +133,6 @@ describe('ObjectEvent should', function() {
       expect(event.immediatePropagationStopped).toBe(true);
 
       // Now spy for testing:
-      spyOn(ObjectEvent.prototype, 'stopImmediatePropagation');
       event = document.createEvent('CustomEvent');
       event.initCustomEvent('test2', false, false, null);
       listener = function(event){
@@ -158,8 +157,7 @@ describe('ObjectEvent should', function() {
       Emitter.dispatchEvent(event);
 
       // True outside
-      //TODO: Phantomjs bug, and lose the scope :/
-      //expect(event.immediatePropagationStopped).toBe(true);
+      expect(event.immediatePropagationStopped).toBe(true);
 
       // Now spy for testing:
       
@@ -202,7 +200,6 @@ describe('ObjectEvent should', function() {
     });
 
     it('return false when cancelable event', function(){
-      var Emitter = Object.create(ObjectEventTarget.prototype);
       var event = new ObjectEvent('test', {cancelable: true});
 
       // False before it ran
@@ -220,6 +217,63 @@ describe('ObjectEvent should', function() {
 
       // Now spy for testing:
       event = new ObjectEvent('test2', {cancelable: true});
+      listener = function(event){
+        spyOn(ObjectEvent.prototype, 'preventDefault');
+        event.preventDefault();
+        expect(ObjectEvent.prototype.preventDefault).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
+
+    it('return true when not cancelable event of native event', function(){
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+
+      // False before it ran
+      expect(event.defaultPrevented).toBe(false);
+      var listener = function(event){
+        event.preventDefault();
+        expect(event.defaultPrevented).toBe(false);
+      };
+      Emitter.addEventListener('test', listener);
+      expect(Emitter.dispatchEvent(event)).toBe(true);
+
+      // True outside
+      expect(event.immediatePropagationStopped).toBe(false);
+
+      // Now spy for testing:
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test2', false, false, null);
+      listener = function(event){
+        spyOn(ObjectEvent.prototype, 'preventDefault');
+        event.preventDefault();
+        expect(ObjectEvent.prototype.preventDefault).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
+
+    it('return false when cancelable event of native event', function(){
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, true, null);
+
+      // False before it ran
+      expect(event.defaultPrevented).toBe(false);
+      var listener = function(event){
+        event.preventDefault();
+        expect(event.defaultPrevented).toBe(true);
+      };
+      Emitter.addEventListener('test', listener);
+      var result = Emitter.dispatchEvent(event);
+      expect(result).toBe(false);
+
+      // True outside
+      expect(event.defaultPrevented).toBe(true);
+
+      // Now spy for testing:
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test2', false, true, null);
       listener = function(event){
         spyOn(ObjectEvent.prototype, 'preventDefault');
         event.preventDefault();
