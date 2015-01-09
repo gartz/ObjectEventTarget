@@ -199,16 +199,16 @@
     <h1>Code coverage report for <span class="entity">src/ObjectEventTarget.js</span></h1>
     <h2>
         
-        Statements: <span class="metric">78.07% <small>(146 / 187)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Statements: <span class="metric">79.68% <small>(149 / 187)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Branches: <span class="metric">66.36% <small>(71 / 107)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">69.16% <small>(74 / 107)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Functions: <span class="metric">72.41% <small>(21 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">75.86% <small>(22 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         
-        Lines: <span class="metric">78.07% <small>(146 / 187)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">79.68% <small>(149 / 187)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
@@ -658,44 +658,44 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">17</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49</span>
-<span class="cline-any cline-yes">69</span>
-<span class="cline-any cline-yes">28</span>
-<span class="cline-any cline-yes">28</span>
-<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">94</span>
+<span class="cline-any cline-yes">126</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-yes">16</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">47</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">21</span>
+<span class="cline-any cline-yes">47</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">23</span>
-<span class="cline-any cline-yes">23</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">35</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">17</span>
-<span class="cline-any cline-yes">17</span>
-<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">35</span>
+<span class="cline-any cline-yes">5</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">14</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">30</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">4</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -1056,13 +1056,13 @@
       // move this element for the begin of the array, to optimize usual
       // repetitive usage of the same object, and fast find the most used
 &nbsp;
-      for (var m = arr.length, i = m - 1; i &gt;= 0; i--){
+      for (var m = arr.length - 1, i = m; i &gt;= 0; i--){
         if (arr[i].key === key) {
-          <span class="missing-if-branch" title="else path not taken" >E</span>if (i !== m){
+          if (i !== m){
             var r = arr.splice(i, 1);
             arr.push(r[0]);
           }
-          return arr[m - 1];
+          return arr[m];
         }
       }
       return;
@@ -1083,10 +1083,10 @@
       has: function (obj){
         return !!find(this.map, obj);
       },
-      delete: <span class="fstat-no" title="function not covered" >function (obj){</span>
-<span class="cstat-no" title="statement not covered" >        var meta = find(this.map, obj);</span>
-<span class="cstat-no" title="statement not covered" >        if (meta) {</span>
-<span class="cstat-no" title="statement not covered" >          this.map.shift();</span>
+      delete: function (obj){
+        var meta = find(this.map, obj);
+        if (meta) {
+          this.map.pop();
         }
       }
     };
@@ -1394,7 +1394,7 @@
 
 </div>
 <div class="footer">
-    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 08 2015 17:01:04 GMT-0800 (PST)</div>
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Thu Jan 08 2015 20:18:15 GMT-0800 (PST)</div>
 </div>
 
 <script src="../prettify.js"></script>

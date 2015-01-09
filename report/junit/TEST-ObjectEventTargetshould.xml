@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ObjectEventTarget should" errors="0" tests="1" failures="0" time="0.001" timestamp="Thu Jan 08 2015 17:01:03 GMT-0800 (PST)">
+  <testsuite name="ObjectEventTarget should" errors="0" tests="1" failures="0" time="0.001" timestamp="Thu Jan 08 2015 20:18:15 GMT-0800 (PST)">
     
       <testcase assertions="0" classname="ObjectEventTarget should" name="be in the DEBUG mode" time="0">
         

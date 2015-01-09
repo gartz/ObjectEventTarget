@@ -56,13 +56,13 @@
       // move this element for the begin of the array, to optimize usual
       // repetitive usage of the same object, and fast find the most used
 
-      for (var m = arr.length, i = m - 1; i >= 0; i--){
+      for (var m = arr.length - 1, i = m; i >= 0; i--){
         if (arr[i].key === key) {
           if (i !== m){
             var r = arr.splice(i, 1);
             arr.push(r[0]);
           }
-          return arr[m - 1];
+          return arr[m];
         }
       }
       return;
@@ -86,7 +86,7 @@
       delete: function (obj){
         var meta = find(this.map, obj);
         if (meta) {
-          this.map.shift();
+          this.map.pop();
         }
       }
     };

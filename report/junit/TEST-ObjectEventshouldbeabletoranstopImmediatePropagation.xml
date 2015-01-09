@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" errors="0" tests="3" failures="0" time="0.004" timestamp="Thu Jan 08 2015 17:01:03 GMT-0800 (PST)">
+  <testsuite name="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" errors="0" tests="3" failures="0" time="0.004" timestamp="Thu Jan 08 2015 20:18:15 GMT-0800 (PST)">
     
-      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="and updated ïmmediatePropagationStopped&quot;" time="0.001">
+      <testcase assertions="0" classname="ObjectEvent should be able to ran &quot;stopImmediatePropagation&quot;" name="and updated ïmmediatePropagationStopped&quot;" time="0.002">
         
       </testcase>
     
