@@ -64,33 +64,33 @@ describe('ObjectEvent should', function() {
       expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
     });
 
-//     it('even when it\'s a native event', function(){
-//       // Code coverage workaround:
-//       var event = document.createEvent('CustomEvent');
-//       event.initCustomEvent('test', false, false, null);
-//       Emitter.dispatchEvent(event);
+    it('even when it\'s a native event', function(){
+      // Code coverage workaround:
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+      Emitter.dispatchEvent(event);
 
-//       // Now spy for testing:
-//       spyOn(ObjectEvent.prototype, 'initEvent');
-//       event = document.createEvent('CustomEvent');
-//       event.initCustomEvent('test', false, false, null);
-//       Emitter.dispatchEvent(event);
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'initEvent');
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', false, false, null);
+      Emitter.dispatchEvent(event);
 
-//       expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
-//     });
+      expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+    });
 
-//     it('even when it\'s a literal object with type', function(){
-//       // Code coverage workaround:
-//       var event = {type: 'test'};
-//       Emitter.dispatchEvent(event);
+    it('even when it\'s a literal object with type', function(){
+      // Code coverage workaround:
+      var event = {type: 'test'};
+      Emitter.dispatchEvent(event);
 
-//       // Now spy for testing:
-//       spyOn(ObjectEvent.prototype, 'initEvent');
-//       event = {type: 'test'};
-//       Emitter.dispatchEvent(event);
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'initEvent');
+      event = {type: 'test'};
+      Emitter.dispatchEvent(event);
 
-//       expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
-//     });
+      expect(ObjectEvent.prototype.initEvent).toHaveBeenCalled();
+    });
   });
 
   describe('be able to ran "stopImmediatePropagation"', function(){

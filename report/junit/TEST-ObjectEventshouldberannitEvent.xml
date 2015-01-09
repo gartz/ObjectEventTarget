@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ObjectEvent should be ran ïnitEvent&quot;" errors="0" tests="1" failures="0" time="0.004" timestamp="Thu Jan 08 2015 20:18:15 GMT-0800 (PST)">
+  <testsuite name="ObjectEvent should be ran ïnitEvent&quot;" errors="0" tests="3" failures="0" time="0.004" timestamp="Thu Jan 08 2015 20:19:44 GMT-0800 (PST)">
     
-      <testcase assertions="0" classname="ObjectEvent should be ran ïnitEvent&quot;" name="when dispatching a event" time="0.003">
+      <testcase assertions="0" classname="ObjectEvent should be ran ïnitEvent&quot;" name="when dispatching a event" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should be ran ïnitEvent&quot;" name="even when it&#39;s a native event" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="ObjectEvent should be ran ïnitEvent&quot;" name="even when it&#39;s a literal object with type" time="0.001">
         
       </testcase>
     
