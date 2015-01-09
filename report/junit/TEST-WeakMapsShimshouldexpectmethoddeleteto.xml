@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="WeakMapsShim should expect method &quot;delete&quot; to" errors="0" tests="3" failures="0" time="0.018" timestamp="Thu Jan 08 2015 21:14:48 GMT-0800 (PST)">
+  <testsuite name="WeakMapsShim should expect method &quot;delete&quot; to" errors="0" tests="3" failures="0" time="0.018" timestamp="Thu Jan 08 2015 23:01:57 GMT-0800 (PST)">
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="return do nothing when the object doesn&#39;t exist" time="0.006">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="return do nothing when the object doesn&#39;t exist" time="0.002">
         
       </testcase>
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="delete only the reference where delete where called" time="0.002">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="delete only the reference where delete where called" time="0.004">
         
       </testcase>
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="delete and set multiple times" time="0.002">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;delete&quot; to" name="delete and set multiple times" time="0.003">
         
       </testcase>
     

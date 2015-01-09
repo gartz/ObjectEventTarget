@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="WeakMapsShim should expect method &quot;get&quot; to" errors="0" tests="3" failures="0" time="0.012" timestamp="Thu Jan 08 2015 21:14:48 GMT-0800 (PST)">
+  <testsuite name="WeakMapsShim should expect method &quot;get&quot; to" errors="0" tests="3" failures="0" time="0.012" timestamp="Thu Jan 08 2015 23:01:57 GMT-0800 (PST)">
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;get&quot; to" name="retrive the value of a setted object" time="0.001">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;get&quot; to" name="retrive the value of a setted object" time="0.002">
         
       </testcase>
     
-      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;get&quot; to" name="retrive the object value everytime it changes" time="0.003">
+      <testcase assertions="0" classname="WeakMapsShim should expect method &quot;get&quot; to" name="retrive the object value everytime it changes" time="0.002">
         
       </testcase>
     
