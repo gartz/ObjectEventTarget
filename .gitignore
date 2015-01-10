@@ -64,3 +64,4 @@ npm-debug.log
 
 # Grunt
 .grunt
+report/
