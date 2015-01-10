@@ -1,7 +1,7 @@
 {
 	"name": "ObjectEventTarget",
 	"description": "A same behaviour EventTarget prototype, that can work with any object from JavaScript",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"keywords": [
 		"assemble"
 	],
