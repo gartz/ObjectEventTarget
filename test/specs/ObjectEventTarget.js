@@ -1,4 +1,4 @@
-/*globals describe, it, expect, jasmine, beforeEach, spyOn*/
+/*globals describe, it, expect, beforeEach*/
 describe('ObjectEventTarget should', function() {
   /*globals ObjectEvent, ObjectEventTarget*/
 
@@ -174,7 +174,7 @@ describe('ObjectEventTarget should', function() {
         order++;
         expect(order).toBe(result + 1);
       },
-      second: function(event){
+      second: function(){
         order++;
         expect(order).toBe(result + 2);
       },
@@ -208,7 +208,7 @@ describe('ObjectEventTarget should', function() {
         order++;
         expect(order).toBe(1);
       },
-      second: function(event){
+      second: function(){
         order++;
         expect(order).toBe(2);
         throw new Error('fail');
@@ -237,7 +237,7 @@ describe('ObjectEventTarget should', function() {
   it('return true on dispatchEvent when all listeners has been removed', function(){
     var callbacks = {
       first: function(){},
-      second: function(event){},
+      second: function(){},
       third: function(){}
     };
 
@@ -252,41 +252,44 @@ describe('ObjectEventTarget should', function() {
     expect(Emitter.dispatchEvent(events.normal)).toBe(true);
   });
 
-  it('allow to remove listeners that doesn\'t exist', function(){
-    var callbacks = {
-      first: function(){},
-      second: function(event){},
-      third: function(){}
-    };
+  describe('allow to remove listeners that', function(){
+    it('doesn\'t exist', function(){
+      var callbacks = {
+        first: function(){},
+        second: function(){},
+        third: function(){}
+      };
 
-    Emitter.removeEventListener('test', callbacks.first);
-    Emitter.removeEventListener('test', callbacks.second);
-    Emitter.removeEventListener('test', callbacks.third);
+      Emitter.removeEventListener('test', callbacks.first);
+      Emitter.removeEventListener('test', callbacks.second);
+      Emitter.removeEventListener('test', callbacks.third);
 
-    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
-  });
+      expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+    });
 
-  it('allow to remove listeners that doesn\'t exist in a instance with other event type', function(){
-    var callbacks = {
-      first: function(){},
-      second: function(event){}
-    };
 
-    Emitter.addEventListener('test', callbacks.first);
-    Emitter.removeEventListener('test2', callbacks.second);
+    it('doesn\'t exist in a instance with other event type', function(){
+      var callbacks = {
+        first: function(){},
+        second: function(){}
+      };
 
-    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
-  });
+      Emitter.addEventListener('test', callbacks.first);
+      Emitter.removeEventListener('test2', callbacks.second);
 
-  it('allow to remove listeners that doesn\'t exist in a instance with other event of same type', function(){
-    var callbacks = {
-      first: function(){},
-      second: function(event){}
-    };
+      expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+    });
 
-    Emitter.addEventListener('test', callbacks.first);
-    Emitter.removeEventListener('test', callbacks.second);
+    it('doesn\'t exist in a instance with other event of same type', function(){
+      var callbacks = {
+        first: function(){},
+        second: function(){}
+      };
 
-    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+      Emitter.addEventListener('test', callbacks.first);
+      Emitter.removeEventListener('test', callbacks.second);
+
+      expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+    });
   });
 });

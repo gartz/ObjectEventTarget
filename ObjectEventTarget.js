@@ -1,8 +1,8 @@
-//! ObjectEventTarget - v1.2.0 - 2015-01-08
+//! ObjectEventTarget - v1.2.1 - 2015-01-09
 //* https://github.com/gartz/ObjectEventTarget/
 //* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
-var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
+var ObjectEventTarget = {options: {VERSION: '1.2.1'}};
 // Add a ObjectEventTarget with a prototype that can be used
 // by any object in the JavaScript context, to add, remove and trigger
 // events.
@@ -61,13 +61,13 @@ var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
       // move this element for the begin of the array, to optimize usual
       // repetitive usage of the same object, and fast find the most used
 
-      for (var m = arr.length, i = m - 1; i >= 0; i--){
+      for (var m = arr.length - 1, i = m; i >= 0; i--){
         if (arr[i].key === key) {
           if (i !== m){
             var r = arr.splice(i, 1);
             arr.push(r[0]);
           }
-          return arr[m - 1];
+          return arr[m];
         }
       }
       return;
@@ -91,7 +91,7 @@ var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
       delete: function (obj){
         var meta = find(this.map, obj);
         if (meta) {
-          this.map.shift();
+          this.map.pop();
         }
       }
     };
@@ -314,22 +314,21 @@ var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
 
     // Add methods when they don't exist
     if (!(this instanceof ObjectEvent)){
-      if (!this.hasOwnProperty('initEvent')){
-        var nativeInitEvent = this.initEvent || function(){};
-        this.initEvent = function(){
-          nativeInitEvent.apply(this, arguments);
-          ObjectEvent.prototype.initEvent.apply(this, arguments);
-        };
-      }
       if (!this.hasOwnProperty('preventDefault')){
-        var nativePreventDefault = this.preventDefault || function(){};
+        var nativePreventDefault = this.preventDefault;
+        if (typeof nativePreventDefault !== 'function'){
+          nativePreventDefault = function(){};
+        }
         this.preventDefault = function(){
           nativePreventDefault.apply(this, arguments);
           ObjectEvent.prototype.preventDefault.apply(this, arguments);
         };
       }
       if (!this.hasOwnProperty('stopImmediatePropagation')){
-        var nativeStopImmediatePropagation = this.stopImmediatePropagation || function(){};
+        var nativeStopImmediatePropagation = this.stopImmediatePropagation;
+        if (typeof stopImmediatePropagation !== 'function'){
+          nativeStopImmediatePropagation = function(){};
+        }
         this.stopImmediatePropagation = function(){
           nativeStopImmediatePropagation.apply(this, arguments);
           ObjectEvent.prototype.stopImmediatePropagation.apply(this, arguments);
@@ -368,10 +367,6 @@ var ObjectEventTarget = {options: {VERSION: '1.2.0'}};
   }
 
   // Expose the ObjectEventTarget to global
-  if (typeof window === 'undefined'){
-    // jshint node:true
-    root = global;
-  }
   ObjectEventTarget.VERSION = VERSION;
   root.ObjectEventTarget = ObjectEventTarget;
   root.ObjectEvent = ObjectEvent;
