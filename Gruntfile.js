@@ -110,6 +110,12 @@ module.exports = function(grunt) {
                 }
               },
               {
+                type: 'lcov',
+                options: {
+                  dir: '<%= meta.report.coverage %>/lcov'
+                }
+              },
+              {
                 type: 'text-summary'
               }
             ]
@@ -141,6 +147,15 @@ module.exports = function(grunt) {
             ]
           }
         }
+      }
+    },
+    coveralls: {
+      options: {
+        // dont fail if coveralls fails
+        force: true
+      },
+      mainTarget: {
+        src: '<%= meta.report.coverage %>/lcov/lcov.info'
       }
     },
     jshint: {
@@ -280,7 +295,7 @@ module.exports = function(grunt) {
     'jshint',
     'clean:test',
     'connect:test',
-    'jasmine:summary'
+    'jasmine:coverage'
   ]);
 
   grunt.registerTask('report', [

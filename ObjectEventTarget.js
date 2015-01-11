@@ -1,4 +1,4 @@
-//! ObjectEventTarget - v1.2.2 - 2015-01-09
+//! ObjectEventTarget - v1.2.2 - 2015-01-11
 //* https://github.com/gartz/ObjectEventTarget/
 //* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
