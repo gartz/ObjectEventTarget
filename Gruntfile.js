@@ -270,7 +270,9 @@ module.exports = function(grunt) {
     }
   });
 
-  require('load-grunt-tasks')(grunt);
+  require('load-grunt-tasks')(grunt, {
+    pattern: ['grunt-*', '!grunt-template-jasmine-istanbul']
+  });
 
   grunt.registerTask('test', [
     'Run tests and code-coverage then print the summary.'
