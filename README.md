@@ -1,6 +1,10 @@
 ObjectEventTarget
 =================
 
+[![Build Status](https://travis-ci.org/gartz/ObjectEventTarget.svg?branch=master)](https://travis-ci.org/gartz/ObjectEventTarget)
+[![Coverage Status](https://img.shields.io/coveralls/gartz/ObjectEventTarget.svg)](https://coveralls.io/r/gartz/ObjectEventTarget?branch=master)
+
+
 A same behaviour EventTarget prototype, that can work with any object from JavaScript
 
 Motivation
