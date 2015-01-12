@@ -3,6 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     meta: {
       pkg: grunt.file.readJSON('package.json'),
+      name: 'ObjectEventTarget',
       src: {
         main: 'src/**/*.js',
         test: 'test/specs/**/*.js',
@@ -17,7 +18,7 @@ module.exports = function(grunt) {
         coverage: '<%= meta.report.base %>/coverage',
         junit: '<%= meta.report.base %>/junit'
       },
-      banner: '//! <%= meta.pkg.title || meta.pkg.name %> - v<%= meta.pkg.version %> - ' +
+      banner: '//! <%= meta.pkg.title || meta.name %> - v<%= meta.pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
         '//<%= meta.pkg.homepage ? "* " + meta.pkg.homepage + "\\n" : "" %>' +
         '//* Copyright (c) <%= grunt.template.today("yyyy") %> <%= meta.pkg.author.name %>;' +
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: '<%= meta.src.main %>',
-        dest: '<%= meta.pkg.name %>.js'
+        dest: '<%= meta.name %>.js'
       }
     },
     uglify: {

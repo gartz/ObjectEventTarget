@@ -1,6 +1,6 @@
 {
-	"name": "ObjectEventTarget",
-	"version": "1.2.2",
+	"name": "objecteventtarget",
+	"version": "1.2.3",
 	"description": "A same behaviour EventTarget prototype, that can work with any object from JavaScript",
 	"repository": {
 		"type": "git",
