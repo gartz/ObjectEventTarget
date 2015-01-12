@@ -19,12 +19,12 @@ Installation
 ------------
 
 To use in your browser, you just need to add the script before the place you are using it.
-```
+```HTML
 <script src="ObjectEventTarget.js"></script>
 ```
 
 To install on NodeJS:
-```
+```bash
 npm install objecteventtarget --save
 ```
 
@@ -93,7 +93,7 @@ Using with NodeJS
 After installing on NodeJS you can use `require('objecteventtarget')` to get a object with ObjectEventTarget and ObjectEvent.
 
 Example:
-```
+```Javascript
 var ObjectEventTarget = require('objecteventtarget').ObjectEventTarget;
 var ObjectEvent = require('objecteventtarget').ObjectEvent;
 
