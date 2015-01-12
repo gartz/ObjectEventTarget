@@ -1,6 +1,5 @@
-/*globals describe, it, expect, jasmine, beforeEach, spyOn*/
+/*globals ObjectEvent, ObjectEventTarget*/
 describe('ObjectEvent should', function() {
-  /*globals ObjectEvent, ObjectEventTarget*/
 
   var Emitter;
 

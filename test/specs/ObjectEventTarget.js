@@ -1,7 +1,5 @@
-/*globals describe, it, expect, beforeEach*/
+/*globals ObjectEvent, ObjectEventTarget*/
 describe('ObjectEventTarget should', function() {
-  /*globals ObjectEvent, ObjectEventTarget*/
-
   var Emitter;
   var events = {};
 
@@ -10,14 +8,47 @@ describe('ObjectEventTarget should', function() {
     events.normal = new ObjectEvent('test');
     events.cancelable = new ObjectEvent('test', {cancelable: true});
   });
- 
 
   it('be available on global scope', function() {
     expect(ObjectEventTarget).toBeDefined();
   });
 
-  it('throw an error if not using "new" operator', function() {
-    expect(ObjectEventTarget).toThrow();
+  describe('throw an error when', function(){
+    it('not using "new" operator', function() {
+      expect(ObjectEventTarget).toThrow();
+    });
+
+    it('using "new" operator', function() {
+      expect(function(){
+        return new ObjectEventTarget();
+      }).toThrow();
+    });
+
+    it('add non string type event', function() {
+      expect(Emitter.addEventListener).toThrow();
+    });
+
+    it('add non function callback', function() {
+      expect(function(){
+        Emitter.addEventListener('test', []);
+      }).toThrow();
+      expect(function(){
+        Emitter.addEventListener('test', '');
+      }).toThrow();
+      expect(function(){
+        Emitter.addEventListener('test', null);
+      }).toThrow();
+    });
+
+    it('dispatch non string type event', function() {
+      expect(Emitter.dispatchEvent).toThrow();
+    });
+
+    it('dispatch events from the prototype instance', function() {
+      expect(ObjectEventTarget.prototype.dispatchEvent).toThrow();
+      expect(ObjectEventTarget.prototype.addEventListener).toThrow();
+      expect(ObjectEventTarget.prototype.removeEventListener).toThrow();
+    });
   });
 
   it('dispatch events in sequence', function(){
@@ -291,5 +322,20 @@ describe('ObjectEventTarget should', function() {
 
       expect(Emitter.dispatchEvent(events.normal)).toBe(true);
     });
+  });
+
+  it('not dispatch same event twice in the same object', function() {
+    var count = 0;
+    Emitter.addEventListener('test', function(){
+      count++;
+    });
+    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
+    expect(count).toBe(1);
+  });
+
+  it('return true when no callbacks has been add to the event dispatched', function() {
+    Emitter.addEventListener('test2', function(){});
+    expect(Emitter.dispatchEvent(events.normal)).toBe(true);
   });
 });

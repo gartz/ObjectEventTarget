@@ -209,11 +209,17 @@ module.exports = function(grunt) {
           strict: false,
           maxparams: 4,
           maxdepth: 6,
-          maxstatements: 20,
+          maxstatements: 40,
           globals: {
             jQuery: true,
             module: true,
-            require: true
+            require: true,
+            describe: true,
+            it: true,
+            expect: true,
+            beforeEach: true,
+            spyOn: true,
+            jasmine: true
           }
         }
       }
@@ -281,7 +287,7 @@ module.exports = function(grunt) {
         'merge-json',
         'jshint',
         'connect:test',
-        'jasmine:summary'
+        'jasmine:coverage'
       ]
     }
   });
