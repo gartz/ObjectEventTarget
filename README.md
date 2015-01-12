@@ -15,6 +15,19 @@ You know as everybody knows how to use the EventTarget today, because every Node
 
 Also it can be used as prototype of a shim to EventTarget in non-modern browsers. Because it's compatible with ES3.
 
+Installation
+------------
+
+To use in your browser, you just need to add the script before the place you are using it.
+```
+<script src="ObjectEventTarget.js"></script>
+```
+
+To install on NodeJS:
+```
+npm install objecteventtarget --save
+```
+
 Projects using it
 -----------------
 
@@ -73,6 +86,19 @@ instanceOne.bar();
 ```
 
 The rest you know...
+
+Using with NodeJS
+-----------------
+
+After installing on NodeJS you can use `require('objecteventtarget')` to get a object with ObjectEventTarget and ObjectEvent.
+
+Example:
+```
+var ObjectEventTarget = require('objecteventtarget').ObjectEventTarget;
+var ObjectEvent = require('objecteventtarget').ObjectEvent;
+
+/* ... your code implemetation ... */
+```
 
 Methods
 -------
