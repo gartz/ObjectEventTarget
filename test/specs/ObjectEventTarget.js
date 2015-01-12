@@ -1,10 +1,12 @@
 /*globals ObjectEvent, ObjectEventTarget*/
 describe('ObjectEventTarget should', function() {
   var Emitter;
+  var Emitter2;
   var events = {};
 
   beforeEach(function() {
     Emitter = Object.create(ObjectEventTarget.prototype);
+    Emitter2 = Object.create(ObjectEventTarget.prototype);
     events.normal = new ObjectEvent('test');
     events.cancelable = new ObjectEvent('test', {cancelable: true});
   });
@@ -338,4 +340,87 @@ describe('ObjectEventTarget should', function() {
     Emitter.addEventListener('test2', function(){});
     expect(Emitter.dispatchEvent(events.normal)).toBe(true);
   });
+
+  describe('do bubbling when', function(){
+    it('event.bubbles is true in the dispatchEvent by more than one different object', function(){
+      var event = new ObjectEvent('test', {bubbles: true});
+      var count = 0;
+
+      Emitter.addEventListener('test', function(event){
+        count++;
+        expect(event.target).toBe(Emitter);
+        expect(event.currentTarget).toBe(Emitter);
+      });
+
+      Emitter2.addEventListener('test', function(event){
+        count++;
+        expect(event.target).toBe(Emitter2);
+        expect(event.currentTarget).toBe(Emitter);
+      });
+
+      Emitter.dispatchEvent(event);
+      Emitter2.dispatchEvent(event);
+
+      expect(count).toBe(2);
+    });
+  });
+
+  describe('not do bubbling when', function(){
+    it('event.bubbles is false in the dispatchEvent by more than one different object', function(){
+      var event = new ObjectEvent('test', {bubbles: false});
+      var count = 0;
+
+      Emitter.addEventListener('test', function(event){
+        count++;
+        expect(event.target).toBe(Emitter);
+        expect(event.currentTarget).toBe(Emitter);
+      });
+
+      Emitter2.addEventListener('test', function(){
+        count++;
+      });
+
+      Emitter.dispatchEvent(event);
+      Emitter2.dispatchEvent(event);
+
+      expect(count).toBe(1);
+    });
+
+    it('event.bubbles is true in the dispatchEvent by the same object', function(){
+      var event = new ObjectEvent('test', {bubbles: false});
+      var count = 0;
+
+      Emitter.addEventListener('test', function(event){
+        count++;
+        expect(event.target).toBe(Emitter);
+        expect(event.currentTarget).toBe(Emitter);
+      });
+      Emitter.dispatchEvent(event);
+      Emitter.dispatchEvent(event);
+
+      expect(count).toBe(1);
+    });
+
+    it('recursive object event dispatching', function(){
+      var event = new ObjectEvent('test', {bubbles: true});
+      var count = 0;
+
+      Emitter.addEventListener('test', function(event){
+        count++;
+        expect(event.target).toBe(Emitter);
+        expect(event.currentTarget).toBe(Emitter);
+      });
+
+      Emitter2.addEventListener('test', function(){
+        count++;
+      });
+
+      expect(Emitter.dispatchEvent(event)).toBe(true);
+      expect(Emitter2.dispatchEvent(event)).toBe(true);
+      expect(Emitter.dispatchEvent(event)).toBe(true);
+
+      expect(count).toBe(2);
+    });
+  });
+
 });

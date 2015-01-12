@@ -189,7 +189,6 @@ module.exports = function(grunt) {
         trailing: true,
         maxparams: 5, // if you need more then 3 use an object param
         maxdepth: 8,
-        maxstatements: 40,
         maxlen: 100,
         boss: true,
         browser: true,
@@ -209,7 +208,6 @@ module.exports = function(grunt) {
           strict: false,
           maxparams: 4,
           maxdepth: 6,
-          maxstatements: 40,
           globals: {
             jQuery: true,
             module: true,

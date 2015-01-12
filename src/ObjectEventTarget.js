@@ -166,35 +166,47 @@
       return true;
     }
 
-    // Prevent event to be triggered more then one time
-    // if you preventDefault the event should be triggered again
-    if (event.path.length !== 0 && event.returnValue) {
-      return true;
+    // Bubbles support
+    if (event.stack.length > 0) {
+      if (!event.bubbles){
+        return true;
+      }
+      if (event.stack.indexOf(obj)!== -1){
+        return true;
+      }
     }
+
+    // Add the obj instance to stack
+    event.stack.push(obj);
 
     // Prevent forcing event new values after begin the callback queue calls
     var returnValue = true;
     var cancelable = !!event.cancelable;
     var type = event.type;
+    var bubbles = event.bubbles;
 
-    // Reset and add the obj instance to path
-    event.path.length = 0;
-    if (event.path.push){
-      event.path.push(obj);
+    var stack = event.stack;
+    var target = stack[stack.length - 1];
+    var currentTarget = stack[0];
+
+    function resetEvent(event){
+      // Ensure non-writetible event properties states
+      event.eventPhase = ObjectEvent.prototype.AT_TARGET;
+      event.cancelable = cancelable;
+      event.returnValue = returnValue;
+      event.defaultPrevented = !returnValue;
+      event.type = type;
+      event.stack = stack;
+      event.target = target;
+      event.currentTarget = currentTarget;
+      event.bubbles = bubbles;
     }
-    var path = event.path;
 
     // Clone the array before iterate, avoid event changing the queue on fly
     eventsQueue = eventsQueue.slice();
     try{
       for (var i = 0, m = eventsQueue.length; i < m; i++) {
-        // Ensure non-writetible event properties states
-        event.eventPhase = ObjectEvent.prototype.AT_TARGET;
-        event.cancelable = cancelable;
-        event.returnValue = returnValue;
-        event.defaultPrevented = !returnValue;
-        event.type = type;
-        event.path = path;
+        resetEvent(event);
 
         // Call next event, using the object instance as context
         eventsQueue[i].call(obj, event);
@@ -212,6 +224,8 @@
         throw e;
       });
     }
+
+    resetEvent(event);
 
     event.eventPhase = ObjectEvent.prototype.NONE;
 
@@ -266,6 +280,9 @@
     // Allow preventDefault()
     this.cancelable = options.cancelable === true;
 
+    // Allow bubbling()
+    this.bubbles = options.bubbles === true;
+
     // Add custom details to the event
     if (typeof options.detail !== 'undefined') {
       this.detail = options.detail;
@@ -274,7 +291,7 @@
     // Phase of the event
     this.eventPhase = ObjectEvent.prototype.NONE;
 
-    this.path = [];
+    this.stack = [];
     this.immediatePropagationStopped = false;
     this.defaultPrevented = false;
     this.returnValue = true;
@@ -294,11 +311,11 @@
     // Phase of the event
     this.eventPhase = ObjectEvent.prototype.NONE;
 
-    // Cleanup the path and add the instance to the event path
-    if (!this.path || !this.path.push) {
+    // Cleanup the stack and add the instance to the event stack
+    if (!this.stack || !this.stack.push) {
       // Opera and other browsers can throw exception if you are using native Event instance
       try{
-        this.path = [];
+        this.stack = [];
       }catch(e){}
     }
 
