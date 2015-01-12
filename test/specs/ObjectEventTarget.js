@@ -421,6 +421,27 @@ describe('ObjectEventTarget should', function() {
 
       expect(count).toBe(2);
     });
+
+    it('stopPropagation function is called', function(){
+      var event = new ObjectEvent('test', {bubbles: true});
+      var count = 0;
+
+      Emitter.addEventListener('test', function(event){
+        count++;
+        expect(event.cancelBubble).toBe(false);
+        event.stopPropagation();
+        expect(event.cancelBubble).toBe(true);
+      });
+
+      Emitter2.addEventListener('test', function(){
+        count++;
+      });
+
+      expect(Emitter.dispatchEvent(event)).toBe(true);
+      expect(Emitter2.dispatchEvent(event)).toBe(true);
+
+      expect(count).toBe(1);
+    });
   });
 
 });

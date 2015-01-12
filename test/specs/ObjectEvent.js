@@ -92,8 +92,87 @@ describe('ObjectEvent should', function() {
     });
   });
 
+  describe('be able to ran "stopPropagation"', function(){
+    it('and updated "cancelBubble"', function(){
+      var event = new ObjectEvent('test', {bubbles: true});
+
+      // False before it ran
+      expect(event.cancelBubble).toBe(false);
+      var listener = function(event){
+        event.stopPropagation();
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
+
+      // True outside
+      expect(event.cancelBubble).toBe(true);
+
+      // Now spy for testing:
+      spyOn(ObjectEvent.prototype, 'stopPropagation');
+      event = new ObjectEvent('test');
+      Emitter.dispatchEvent(event);
+
+      expect(ObjectEvent.prototype.stopPropagation).toHaveBeenCalled();
+    });
+
+    it('even when it\'s a native event', function(){
+      var event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test', true, false, null);
+
+      // False before it ran
+      expect(event.cancelBubble).toBe(false);
+      var listener = function(event){
+        event.stopPropagation();
+        expect(event.cancelBubble).toBe(true);
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
+
+      // True outside
+      expect(event.cancelBubble).toBe(true);
+
+      // Now spy for testing:
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent('test2', true, false, null);
+      listener = function(event){
+        spyOn(event, 'stopPropagation');
+        event.stopPropagation();
+        expect(event.stopPropagation).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
+
+    it('even when it\'s a literal object', function(){
+      var event = {type: 'test', bubbles: true};
+
+      // False before it ran
+      expect(event.cancelBubble).toBe(undefined);
+      var listener = function(event){
+        event.stopPropagation();
+        expect(event.cancelBubble).toBe(true);
+      };
+      Emitter.addEventListener('test', listener);
+      Emitter.dispatchEvent(event);
+
+      // True outside
+      expect(event.cancelBubble).toBe(true);
+
+      // Now spy for testing:
+      
+      event = {type: 'test2'};
+      listener = function(event){
+        spyOn(event, 'stopPropagation');
+        event.stopPropagation();
+        expect(event.stopPropagation).toHaveBeenCalled();
+      };
+      Emitter.addEventListener('test2', listener);
+      Emitter.dispatchEvent(event);
+    });
+  });
+
   describe('be able to ran "stopImmediatePropagation"', function(){
-    it('and updated ïmmediatePropagationStopped"', function(){
+    it('and updated "immediatePropagationStopped"', function(){
       var event = new ObjectEvent('test');
 
       // False before it ran

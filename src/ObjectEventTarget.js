@@ -166,14 +166,21 @@
       return true;
     }
 
+    var eventPhase = ObjectEvent.prototype.AT_TARGET;
+
     // Bubbles support
     if (event.stack.length > 0) {
       if (!event.bubbles){
         return true;
       }
+      if (event.cancelBubble){
+        return true;
+      }
       if (event.stack.indexOf(obj)!== -1){
         return true;
       }
+
+      eventPhase = ObjectEvent.prototype.BUBBLING_PHASE;
     }
 
     // Add the obj instance to stack
@@ -184,6 +191,7 @@
     var cancelable = !!event.cancelable;
     var type = event.type;
     var bubbles = event.bubbles;
+    var cancelBubble = event.cancelBubble;
 
     var stack = event.stack;
     var target = stack[stack.length - 1];
@@ -191,7 +199,7 @@
 
     function resetEvent(event){
       // Ensure non-writetible event properties states
-      event.eventPhase = ObjectEvent.prototype.AT_TARGET;
+      event.eventPhase = eventPhase;
       event.cancelable = cancelable;
       event.returnValue = returnValue;
       event.defaultPrevented = !returnValue;
@@ -200,6 +208,7 @@
       event.target = target;
       event.currentTarget = currentTarget;
       event.bubbles = bubbles;
+      event.cancelBubble = cancelBubble;
     }
 
     // Clone the array before iterate, avoid event changing the queue on fly
@@ -224,8 +233,6 @@
         throw e;
       });
     }
-
-    resetEvent(event);
 
     event.eventPhase = ObjectEvent.prototype.NONE;
 
@@ -293,12 +300,14 @@
 
     this.stack = [];
     this.immediatePropagationStopped = false;
+    this.cancelBubble = false;
     this.defaultPrevented = false;
     this.returnValue = true;
     this.type = String(type);
   }
-  ObjectEvent.prototype.AT_TARGET = 2;
   ObjectEvent.prototype.NONE = 0;
+  ObjectEvent.prototype.AT_TARGET = 2;
+  ObjectEvent.prototype.BUBBLING_PHASE = 3;
   ObjectEvent.prototype.initEvent = function() {
     // Init event if it has some propertie wrong, fix it
 
@@ -320,6 +329,7 @@
     }
 
     this.immediatePropagationStopped = this.immediatePropagationStopped === true;
+    this.cancelBubble = this.cancelBubble === true;
     this.defaultPrevented = this.cancelable && this.defaultPrevented === true;
     this.returnValue = true;
     this.type = String(this.type);
@@ -334,6 +344,16 @@
         this.preventDefault = function(){
           nativePreventDefault.apply(this, arguments);
           ObjectEvent.prototype.preventDefault.apply(this, arguments);
+        };
+      }
+      if (!this.hasOwnProperty('stopPropagation')){
+        var nativeStopPropagation = this.stopPropagation;
+        if (typeof stopPropagation !== 'function'){
+          nativeStopPropagation = function(){};
+        }
+        this.stopPropagation = function(){
+          nativeStopPropagation.apply(this, arguments);
+          ObjectEvent.prototype.stopPropagation.apply(this, arguments);
         };
       }
       if (!this.hasOwnProperty('stopImmediatePropagation')){
@@ -351,6 +371,10 @@
   ObjectEvent.prototype.preventDefault = function(){
     // Prevent the default result, makes the dispatchEvent returns false
     this.defaultPrevented = !!this.cancelable;
+  };
+  ObjectEvent.prototype.stopPropagation = function(){
+    // Don't allow the next callback to be called
+    this.cancelBubble = !!this.bubbles;
   };
   ObjectEvent.prototype.stopImmediatePropagation = function(){
     // Don't allow the next callback to be called
