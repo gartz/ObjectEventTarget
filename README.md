@@ -1,6 +1,8 @@
 ObjectEventTarget
 =================
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gartz/ObjectEventTarget?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![npm version](https://badge.fury.io/js/objecteventtarget.svg)](http://badge.fury.io/js/objecteventtarget)
 [![Build Status](https://travis-ci.org/gartz/ObjectEventTarget.svg?branch=master)](https://travis-ci.org/gartz/ObjectEventTarget)
 [![Dependency Status](https://gemnasium.com/gartz/ObjectEventTarget.svg)](https://gemnasium.com/gartz/ObjectEventTarget)
