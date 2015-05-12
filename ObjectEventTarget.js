@@ -1,8 +1,8 @@
-//! ObjectEventTarget - v1.3.0 - 2015-01-11
+//! ObjectEventTarget - v1.3.1 - 2015-05-11
 //* https://github.com/gartz/ObjectEventTarget/
 //* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
-var ObjectEventTarget = {options: {VERSION: '1.3.0'}};
+var ObjectEventTarget = {options: {VERSION: '1.3.1'}};
 // Add a ObjectEventTarget with a prototype that can be used
 // by any object in the JavaScript context, to add, remove and trigger
 // events.
