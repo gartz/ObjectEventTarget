@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "0.10"
+addons:
+  code_climate:
+    repo_token: f5e23552badd577428e20090f2458b2ca324cef32551a2246bf5d2fe48f1a124
 before_install: npm install -g grunt-cli
 install: npm install
 before_script:
@@ -9,6 +12,3 @@ script:
   - grunt coveralls
 after_script:
   - codeclimate < report/coverage/lcov/lcov.info
-addons:
-  code_climate:
-    repo_token: f5e23552badd577428e20090f2458b2ca324cef32551a2246bf5d2fe48f1a124
