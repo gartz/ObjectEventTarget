@@ -19,7 +19,7 @@
   'use strict';
 
   // Load options that can be setup before loading the library
-  var options = root.ObjectEventTarget && root.ObjectEventTarget.options || {};
+  var options = root.ObjectEventTarget ? root.ObjectEventTarget.options : {};
   var DEBUG = root.DEBUG || options.DEBUG;
   var VERSION = options.VERSION || 'development';
 
