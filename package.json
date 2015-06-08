@@ -52,6 +52,17 @@
     "node-static": "^0.7.6"
   },
   "keywords": [
-    "assemble"
+    "events",
+	"object",
+	"eventtarget",
+	"prototype",
+	"listeners",
+	"dispatch",
+	"event",
+	"listener",
+	"objectevent",
+	"nodeevent",
+	"browserevent",
+	"shim"
   ]
 }
