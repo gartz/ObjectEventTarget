@@ -1,4 +1,4 @@
-//! ObjectEventTarget - v1.3.1 - 2015-05-11
+//! ObjectEventTarget - v1.3.1 - 2015-06-08
 //* https://github.com/gartz/ObjectEventTarget/
 //* Copyright (c) 2015 Gabriel Reitz Giannattasio <gabriel@gartz.com.br>; Licensed 
 
@@ -24,7 +24,7 @@ var ObjectEventTarget = {options: {VERSION: '1.3.1'}};
   'use strict';
 
   // Load options that can be setup before loading the library
-  var options = root.ObjectEventTarget && root.ObjectEventTarget.options || {};
+  var options = root.ObjectEventTarget ? root.ObjectEventTarget.options : {};
   var DEBUG = root.DEBUG || options.DEBUG;
   var VERSION = options.VERSION || 'development';
 
