@@ -8,6 +8,7 @@ ObjectEventTarget
 [![Dependency Status](https://gemnasium.com/gartz/ObjectEventTarget.svg)](https://gemnasium.com/gartz/ObjectEventTarget)
 [![Coverage Status](https://img.shields.io/coveralls/gartz/ObjectEventTarget.svg)](https://coveralls.io/r/gartz/ObjectEventTarget?branch=master)
 [![Code Climate](https://codeclimate.com/github/gartz/ObjectEventTarget/badges/gpa.svg)](https://codeclimate.com/github/gartz/ObjectEventTarget)
+[![Analytics](https://ga-beacon.appspot.com/UA-24619548-7/ObjectEventTarget/readme)](https://github.com/igrigorik/ga-beacon)
 
 A same behaviour EventTarget prototype, that can work with any object from JavaScript
 
