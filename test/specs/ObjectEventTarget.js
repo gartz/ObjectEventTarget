@@ -173,6 +173,7 @@ describe('ObjectEventTarget should', function() {
 
   it('allow to stopImmediatePropagation to be removed, executing the events after', function(){
     var order = 0;
+    var third = false;
     var callbacks = {
       first: function(){
         order++;
@@ -185,7 +186,9 @@ describe('ObjectEventTarget should', function() {
         expect(order).toBe(2);
       },
       third: function(){
-        expect(order).toBe(3); // run only if second doesn't exist
+        third = true;
+        // run only if second doesn't exist, otherwise it will be 4
+        expect(order).toBe(3);
       }
     };
 
@@ -197,6 +200,7 @@ describe('ObjectEventTarget should', function() {
 
     Emitter.dispatchEvent(events.normal);
     expect(order).toBe(3);
+    expect(third).toBeTruthy();
   });
 
   it('respect the type of events and sequence of dispatchs', function(){

@@ -26,8 +26,9 @@
   },
   "scripts": {
     "start": "node ./server.js",
-    "test": "grunt test"
-  },
+    "test": "grunt test",
+		"prepublish": "grunt"
+	},
   "devDependencies": {
     "assemble": "~0.4.42",
     "codeclimate-test-reporter": "0.0.4",
